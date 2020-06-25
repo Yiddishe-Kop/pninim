@@ -1,9 +1,15 @@
 @tailwind base;
+/*! purgecss start ignore */
+@import "reset";
+/*! purgecss end ignore */
 
 /* Components */
 @tailwind components;
 
 /*! purgecss start ignore */
+@import "vue-formulate-theme";
+@import "buttons";
+@import "transitions";
 @import "nprogress";
 /*! purgecss end ignore */
 

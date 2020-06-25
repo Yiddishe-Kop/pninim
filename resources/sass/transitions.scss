@@ -1,0 +1,34 @@
+.transition {
+  transition: all 0.3s ease;
+}
+
+// Page transition
+.slideUp-enter-active {
+  transition: all 0.3s ease-in;
+}
+.slideUp-leave-active {
+  transition: none;
+}
+.slideUp-enter,
+.slideUp-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+// Modal transition
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  opacity: 1;
+  transition: all 0.3s ease-in;
+  .modal {
+    transform: none;
+    transition: all 0.3s ease;
+  }
+}
+.modal-fade-enter,
+.modal-fade-leave-to {
+  opacity: 0;
+  .modal {
+    transform: scale(0.8);
+  }
+}

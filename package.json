@@ -25,6 +25,8 @@
     "@inertiajs/inertia-vue": "^0.1.2",
     "@tailwindcss/ui": "^0.3.0",
     "laravel-mix-tailwind": "^0.1.0",
+    "popper.js": "^1.16.1",
+    "portal-vue": "^2.1.7",
     "tailwindcss": "^1.4.6",
     "vue": "^2.6.11"
   }

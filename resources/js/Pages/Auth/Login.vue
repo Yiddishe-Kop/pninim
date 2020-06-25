@@ -27,7 +27,8 @@
             <inertia-link
               href="/register"
               class="inline-block px-3 py-2 mt-2 text-gray-600 border border-gray-600 rounded hover:text-gray-800 hover:bg-gray-100"
-            >register</inertia-link>
+              >register</inertia-link
+            >
           </div>
         </div>
         <div class="flex items-center justify-between px-10 py-4 bg-white border-t border-gray-200">
@@ -40,39 +41,39 @@
 </template>
 
 <script>
-import LoadingButton from "@/components/ui/LoadingButton";
-import Logo from "@/components/ui/Logo";
+import LoadingButton from '@/components/ui/LoadingButton';
+import Logo from '@/components/ui/Logo';
 
 export default {
-  metaInfo: { title: "Login" },
+  metaInfo: { title: 'Login' },
   components: {
     LoadingButton,
-    Logo
+    Logo,
   },
   props: {
-    errors: Object
+    errors: Object,
   },
   data() {
     return {
       sending: false,
       form: {
-        email: "",
-        password: "",
-        remember: null
-      }
+        email: '',
+        password: '',
+        remember: null,
+      },
     };
   },
   methods: {
     submit() {
       this.sending = true;
       this.$inertia
-        .post(this.route("login.attempt"), {
+        .post(this.route('login.attempt'), {
           email: this.form.email,
           password: this.form.password,
-          remember: this.form.remember
+          remember: this.form.remember,
         })
         .then(() => (this.sending = false));
-    }
-  }
+    },
+  },
 };
 </script>

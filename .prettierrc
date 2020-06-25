@@ -1,0 +1,13 @@
+{
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "printWidth": 120,
+  "overrides": [
+    {
+      "files": ["resources/js/components/ui/Icon.vue"],
+      "options": {
+        "printWidth": 30000
+      }
+    }
+  ]
+}

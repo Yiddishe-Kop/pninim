@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', 'PostController@index');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('access-denied', 'Auth\LoginController@unapproved');
 
 Route::middleware('guest')->group(function () {
     Route::get('register', 'Auth\RegisterController@showRegisterForm')->name('register');
@@ -22,8 +24,22 @@ Route::middleware('guest')->group(function () {
     Route::post('login', 'Auth\LoginController@login')->name('login.attempt');
 });
 
-// Auth::routes();
+Route::middleware('admin')->group(function () {
+
+    Route::post('{user}/approve', 'UserController@approve')->name('users.approve');
+    Route::post('{user}/unapprove', 'UserController@unapprove')->name('users.unapprove');
+
+});
+
+Route::middleware('approved')->group(function () {
+
+});
+
+Route::middleware('auth')->group(function () {
+
+});
 
 Route::resources([
     'posts' => 'PostController',
+    'users' => 'UserController',
 ]);
