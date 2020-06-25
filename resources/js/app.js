@@ -1,9 +1,11 @@
 import Vue from 'vue'
+import VueFormulate from '@braid/vue-formulate'
 import { InertiaApp } from '@inertiajs/inertia-vue'
 
 Vue.config.productionTip = false
 
 Vue.mixin({ methods: { route: window.route } })
+Vue.use(VueFormulate)
 Vue.use(InertiaApp)
 
 let appEl = document.getElementById('app')

@@ -4,13 +4,16 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
+use League\Glide\Server;
 
 class AppServiceProvider extends ServiceProvider {
 
     public function register() {
         $this->registerInertia();
+        $this->registerGlide();
 
     }
 
@@ -59,6 +62,17 @@ class AppServiceProvider extends ServiceProvider {
                 ],
             ],
         ]);
+    }
+
+    protected function registerGlide() {
+        $this->app->bind(Server::class, function ($app) {
+            return Server::create([
+                'source' => Storage::getDriver(),
+                'cache' => Storage::getDriver(),
+                'cache_folder' => '.glide-cache',
+                'base_url' => 'img',
+            ]);
+        });
     }
 
 }

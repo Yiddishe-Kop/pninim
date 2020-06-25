@@ -15,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PostController@index');
 
+Route::middleware('guest')->group(function () {
+    Route::get('register', 'Auth\RegisterController@showRegisterForm')->name('register');
+    Route::post('register', 'Auth\RegisterController@register')->name('register.attempt');
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\LoginController@login')->name('login.attempt');
+});
+
+// Auth::routes();
+
 Route::resources([
     'posts' => 'PostController',
 ]);
