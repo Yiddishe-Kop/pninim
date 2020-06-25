@@ -8,7 +8,7 @@
       <formulate-input type="submit" value="Post" />
     </form>
 
-    <div v-if="posts.length" class="max-w-lg px-2 py-6 mx-auto my-12 space-y-6">
+    <div v-if="posts.length" class="max-w-lg px-2 py-6 mx-auto my-12 space-y-8">
       <post-card v-for="post in posts" :key="post.id" :post="post" @destroy="destroy(post.id)" />
     </div>
     <div v-else class="my-6">No posts yet 😬</div>
