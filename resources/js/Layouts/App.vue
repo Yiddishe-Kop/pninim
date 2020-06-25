@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div dir="rtl">
     <header class="flex items-center justify-center px-6 py-4 text-gray-200 bg-gray-700">
       <span class="text-2xl font-bold">Pninim</span>
     </header>

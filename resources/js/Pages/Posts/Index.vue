@@ -1,15 +1,8 @@
 <template>
-  <div class="px-6 py-12 text-center text-teal-800 bg-teal-300 rounded">
-    <h1 class="text-3xl font-black">{{ $page.message }}</h1>
-    <p class="mt-4 text-teal-50">Watch this space! 💡</p>
-
-    <ul v-if="posts.length" class="px-2 py-6 my-12 space-y-2 bg-gray-500 rounded">
-      <li v-for="post in posts" :key="post.id" class="py-1 bg-gray-400 rounded">
-        <h3 class="text-xl">{{ post.title }}</h3>
-        <p>{{ post.content }}</p>
-        <button @click="destroy(post.id)" class="text-red-600 bg-red-100 form-input">delete</button>
-      </li>
-    </ul>
+  <div class="px-6 py-12 text-center text-teal-800 rounded bg-teal-50">
+    <div v-if="posts.length" class="max-w-lg px-2 py-6 mx-auto my-12 space-y-6">
+      <post-card v-for="post in posts" :key="post.id" :post="post" @destroy="destroy(post.id)" />
+    </div>
     <div v-else class="my-6">No posts yet 😬</div>
 
     <form
@@ -26,11 +19,13 @@
 
 <script>
 import Layout from "../../Layouts/App";
+import PostCard from "../../components/PostCard";
 
 export default {
   name: "Home",
   layout: Layout,
   props: ["posts"],
+  components: { PostCard },
   data() {
     return {
       post: {}
