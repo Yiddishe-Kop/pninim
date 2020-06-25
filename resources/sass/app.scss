@@ -1,1 +1,11 @@
-//
+@tailwind base;
+
+/* Components */
+@tailwind components;
+
+/*! purgecss start ignore */
+@import "nprogress";
+/*! purgecss end ignore */
+
+/* Utilities */
+@tailwind utilities;
