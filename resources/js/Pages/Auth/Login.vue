@@ -3,7 +3,7 @@
     <div class="w-full max-w-md">
       <form class="mt-8 overflow-hidden bg-gray-200 rounded-lg shadow-xl" @submit.prevent="submit">
         <div class="px-10 py-12">
-          <logo class="dark" />
+          <logo class="w-12 dark" />
           <h1 class="mt-4 text-6xl font-bold text-center font-siddur">פנינים</h1>
           <h3 class="mt-5 font-semibold text-center">כניסה לחשבון</h3>
           <div class="w-24 mx-auto mt-6" />

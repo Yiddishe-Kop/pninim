@@ -2,7 +2,10 @@
   <div class="flex flex-col min-h-screen" dir="rtl">
     <header class="flex items-center justify-between px-6 py-2 text-gray-200 bg-gray-700">
       <portal-target name="dropdown" slim />
-      <span class="text-2xl font-bold">פנינים</span>
+      <div class="flex items-center">
+        <logo class="w-8" />
+        <span class="mr-3 -mt-6 text-5xl font-siddur">פְּנִינִים</span>
+      </div>
       <div v-if="$page.auth.user" class="flex items-center justify-between p-4 text-sm md:py-0 md:px-12 md:text-md">
         <div class="mt-1 mr-4">{{ $page.auth.user.name }}</div>
         <dropdown class="mt-1" placement="bottom-start">
@@ -44,7 +47,14 @@
       </inertia-link>
     </header>
     <main class="flex-1 w-full">
-      <slot />
+      <div class="sticky top-0 z-0 bg-gray-100 h-96"></div>
+      <div class="relative z-10 grid items-start max-w-5xl grid-cols-10 gap-8 px-2 py-12 mx-auto -mt-96">
+        <aside class="sticky col-span-2 p-5 bg-gray-200 shadow-inner top-8 rounded-xl"></aside>
+        <section class="col-span-6">
+          <slot />
+        </section>
+        <aside class="sticky col-span-2 p-5 bg-gray-200 shadow-inner top-8 rounded-xl"></aside>
+      </div>
     </main>
     <footer class="px-6 py-4 text-xs text-center text-gray-200 bg-gray-700">
       &copy; {{ new Date().getFullYear() }} by Yehuda Neufeld
@@ -53,12 +63,13 @@
 </template>
 
 <script>
+import Logo from '@/components/ui/Logo';
 import Dropdown from '@/components/ui/Dropdown';
 import Avatar from '@/components/ui/Avatar';
 
 export default {
   name: 'Layout',
-  components: { Dropdown, Avatar },
+  components: { Logo, Dropdown, Avatar },
 };
 </script>
 

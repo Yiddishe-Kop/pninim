@@ -2,7 +2,7 @@
   <div class="flex items-center justify-center min-h-screen p-6 bg-gray-800" dir="rtl">
     <div class="w-full max-w-md">
       <div class="px-10 py-12 mt-8 overflow-hidden text-center bg-gray-200 rounded-lg shadow-xl">
-        <logo class="dark" />
+        <logo class="w-12 dark" />
         <h1 class="mt-4 text-6xl font-bold text-center font-siddur">פנינים</h1>
         <badge color="red" size="large" class="mt-6 border-2 border-red-400">הגישה נחסמה</badge>
         <p class="mt-4 text-sm leading-5 text-gray-700">

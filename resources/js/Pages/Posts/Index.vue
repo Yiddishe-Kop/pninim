@@ -1,11 +1,11 @@
 <template>
-  <div class="max-w-lg px-2 py-6 mx-auto text-teal-800">
+  <div>
     <write-post v-if="$page.auth.user" />
-    <div v-else class="py-12 mt-6 text-center bg-gray-50 rounded-xl">
+    <div v-else class="py-12 text-center bg-gray-200 shadow-inner rounded-xl">
       <p class="text-3xl text-gray-700 font-siddur">רוצה גם לכתוב את החידושים שלך?</p>
       <inertia-link
         href="/register"
-        class="inline-block px-6 py-2 my-4 font-bold text-gray-800 border-2 border-gray-800 rounded-full hover:bg-gray-200"
+        class="inline-block px-6 py-2 my-4 font-bold text-gray-800 bg-gray-100 border-2 border-gray-800 rounded-full hover:bg-white"
       >
         הירשם
       </inertia-link>
