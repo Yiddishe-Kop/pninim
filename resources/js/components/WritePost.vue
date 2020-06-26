@@ -1,7 +1,7 @@
 <template>
   <form
     @submit.prevent="submit"
-    class="relative flex items-start justify-center mt-10 space-y-2 bg-white shadow-xl rounded-xl"
+    class="relative flex items-start justify-center space-y-2 bg-white shadow-xl rounded-xl"
   >
     <div class="p-4">
       <avatar :user="user" />

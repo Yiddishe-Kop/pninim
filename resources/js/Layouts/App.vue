@@ -48,12 +48,12 @@
     </header>
     <main class="flex-1 w-full">
       <div class="sticky top-0 z-0 bg-gray-100 h-96"></div>
-      <div class="relative z-10 grid items-start max-w-5xl grid-cols-10 gap-8 px-2 py-12 mx-auto -mt-96">
-        <aside class="sticky col-span-2 p-5 bg-gray-200 shadow-inner top-8 rounded-xl"></aside>
-        <section class="col-span-6">
+      <div class="relative z-10 grid items-start max-w-5xl gap-8 px-2 py-12 mx-auto md:grid-cols-10 -mt-96">
+        <aside class="sticky p-5 bg-gray-200 shadow-inner md:col-span-2 top-8 rounded-xl"></aside>
+        <section class="md:col-span-6">
           <slot />
         </section>
-        <aside class="sticky col-span-2 p-5 bg-gray-200 shadow-inner top-8 rounded-xl"></aside>
+        <aside class="sticky p-5 bg-gray-200 shadow-inner md:col-span-2 top-8 rounded-xl"></aside>
       </div>
     </main>
     <footer class="px-6 py-4 text-xs text-center text-gray-200 bg-gray-700">
