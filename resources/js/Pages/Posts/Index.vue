@@ -1,6 +1,10 @@
 <template>
   <div class="max-w-4xl px-6 py-12 mx-auto text-teal-800">
-    <form @submit.prevent="submit" class="flex flex-col items-center justify-center mt-10 space-y-2">
+    <form
+      v-if="$page.auth.user"
+      @submit.prevent="submit"
+      class="flex flex-col items-center justify-center mt-10 space-y-2"
+    >
       <p>Write your chiddush!</p>
       <formulate-input type="text" v-model="post.title" :errors="$page.errors.title" label="כותרת" />
       <formulate-input type="text" v-model="post.ref" :errors="$page.errors.ref" label="מראה מקום" />

@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "siddur";
+  src: url("/fonts/SiddurOCGX.ttf") format("ttf"), url("/fonts/SiddurOCGX.woff2") format("woff2");
+}
+@font-face {
+  font-family: "SBLhebrew";
+  src: url("/fonts/SBL_Hbrw.ttf") format("ttf"), url("/fonts/SBL_Hbrw.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Heebo var"; // variable font! [https://github.com/TypeNetwork/heebo]
+  font-weight: 100 900;
+  font-style: normal;
+  font-named-instance: "Regular";
+  font-display: swap;
+  src: url("/fonts/Heebo-beta-VF.ttf");
+}
+
+.font-siddur {
+  margin-top: -0.4em; // fixes variable-font leading bug
+}

@@ -25,10 +25,15 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Cerebri Sans', ...defaultTheme.fontFamily.sans],
+        sans: ['Heebo var', ...defaultTheme.fontFamily.sans],
+        siddur: ['siddur', 'Heebo var', ...defaultTheme.fontFamily.sans],
+        sbl: ['SBLhebrew', 'Heebo var', ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
         xxs: '0.675rem'
+      },
+      borderRadius: {
+        xl: '1rem'
       },
       boxShadow: theme => ({
         outline: '0 0 0 2px ' + theme('colors.indigo.500'),
