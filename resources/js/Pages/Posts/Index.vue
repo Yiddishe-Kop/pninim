@@ -3,7 +3,7 @@
     <write-post v-if="$page.auth.user" />
 
     <transition-group v-if="posts.length" name="postList" appear class="block my-12 space-y-8">
-      <post-card v-for="post in posts" :key="post.id" :post="post" @destroy="destroy(post.id)" />
+      <post-card v-for="post in posts" :key="post.id" :post="post" />
     </transition-group>
     <div v-else class="my-6">No posts yet 😬</div>
   </div>
@@ -19,10 +19,5 @@ export default {
   layout: Layout,
   props: ['posts'],
   components: { PostCard, WritePost },
-  methods: {
-    destroy(postId) {
-      this.$inertia.delete(this.route('posts.destroy', postId));
-    },
-  },
 };
 </script>
