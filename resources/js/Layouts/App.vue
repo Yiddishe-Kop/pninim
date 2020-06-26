@@ -11,7 +11,7 @@
               class="text-gray-700 group-hover:text-teal-600 p-0.5 transition rounded-full focus:text-teal-600 mr-1 whitespace-no-wrap"
               :class="{ 'border-4 border-teal-300 hover:border-teal-400': $page.auth.user.is_admin }"
             >
-              <img :src="$page.auth.user.photoUrl" :alt="$page.auth.user.name" class="w-8 h-8 rounded-full" />
+              <avatar :user="$page.auth.user" />
             </div>
           </div>
           <div slot="dropdown" class="mt-2 overflow-hidden text-sm text-gray-900 bg-white rounded shadow-xl">
@@ -54,9 +54,11 @@
 
 <script>
 import Dropdown from '@/components/ui/Dropdown';
+import Avatar from '@/components/ui/Avatar';
+
 export default {
   name: 'Layout',
-  components: { Dropdown },
+  components: { Dropdown, Avatar },
 };
 </script>
 

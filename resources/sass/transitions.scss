@@ -15,6 +15,18 @@
   transform: translateY(10px);
 }
 
+// Post-list transition
+.postList-enter-active,
+.postList-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+.postList-enter,
+.postList-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
 // Modal transition
 .modal-fade-enter-active,
 .modal-fade-leave-active {

@@ -1,5 +1,7 @@
 @font-face {
   font-family: "siddur";
+  font-weight: 100 900;
+  font-style: normal;
   src: url("/fonts/SiddurOCGX.ttf") format("ttf"), url("/fonts/SiddurOCGX.woff2") format("woff2");
 }
 @font-face {
@@ -17,4 +19,5 @@
 
 .font-siddur {
   margin-top: -0.4em; // fixes variable-font leading bug
+  font-weight: 700;
 }
