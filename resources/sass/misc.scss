@@ -1,0 +1,61 @@
+.logo {
+  svg {
+    transition: all 0.2s ease;
+    animation: rotate 4s ease-in-out 1s 5;
+    .lamp {
+      fill: currentColor;
+      @apply text-brand;
+    }
+    .c {
+      fill: currentColor;
+      @apply text-gray-300;
+    }
+    &:hover {
+      transform: rotate3d(0, 1, 0, 0deg);
+      // animation-duration: 8s;
+      .lamp {
+        animation: blink 1s ease 0s infinite;
+      }
+    }
+  }
+  &.dark {
+    svg .c {
+      @apply text-gray-900;
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate3d(0, 1, 0, 0deg);
+    }
+    50% {
+      transform: rotate3d(0, 1, 0, 180deg);
+    }
+    100% {
+      transform: rotate3d(0, 1, 0, 0deg);
+    }
+  }
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    15% {
+      opacity: 0.3;
+    }
+    35% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    85% {
+      opacity: 1;
+    }
+    95% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

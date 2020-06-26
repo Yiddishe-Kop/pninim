@@ -10,6 +10,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        brand: '#ffad1f',
         gray: {
           50: '#fbfdfe',
           80: '#EFF4F8',
