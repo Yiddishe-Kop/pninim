@@ -50,12 +50,3 @@ export default {
   },
 };
 </script>
-
-<style>
-textarea.title,
-textarea.content {
-  display: block;
-  width: 100%;
-  line-height: 1.2;
-}
-</style>
