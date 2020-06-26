@@ -1,15 +1,41 @@
 <template>
-  <img v-if="user.photo_url" :src="user.photo_url" :alt="user.name" class="w-12 h-12 bg-gray-200 rounded-full" />
+  <img
+    v-if="user.photo_url"
+    :src="user.photo_url"
+    :alt="user.name"
+    class="bg-gray-200 rounded-full"
+    :class="sizeClasses"
+  />
 
-  <span v-else class="inline-flex items-center justify-center w-10 h-10 bg-gray-500 rounded-full">
-    <span class="font-medium leading-none text-white">{{ initials(user.name) }}</span>
+  <span v-else :class="sizeClasses" class="inline-flex items-center justify-center bg-gray-500 rounded-full">
+    <span :class="textSizeClass" class="font-medium leading-none text-white">{{ initials(user.name) }}</span>
   </span>
 </template>
 
 <script>
 export default {
   name: 'Avatar',
-  props: ['user'],
+  props: ['user', 'size'],
+  computed: {
+    sizeClasses() {
+      const sizes = {
+        sm: 'w-6 h-6',
+        md: 'w-8 h-8',
+        lg: 'w-10 h-10',
+        xl: 'w-20 h-20',
+      };
+      return sizes[this.size] || sizes.lg;
+    },
+    textSizeClass() {
+      const sizes = {
+        sm: 'text-xs',
+        md: 'text-sm',
+        lg: 'text-base',
+        xl: 'text-md',
+      };
+      return sizes[this.size] || sizes.lg;
+    },
+  },
   methods: {
     initials(name) {
       return name.split(' ').reduce((acc, val) => {

@@ -7,7 +7,8 @@
         <span class="mr-2 font-light">{{ post.ref }}</span>
       </div>
       <div class="flex items-center">
-        <span>{{ post.user.name }}</span>
+        <avatar :user="post.user" size="sm" />
+        <span class="mr-1.5 text-xs">{{ post.user.name }}</span>
         <icon v-if="post.user.is_approved" name="badge-check" class="w-5 mr-1 text-teal-300" />
         <icon name="selector" class="w-5 mr-2 text-gray-300" />
       </div>
@@ -49,11 +50,12 @@
 
 <script>
 import TrafficLights from './ui/TrafficLights';
+import Avatar from './ui/Avatar';
 
 export default {
   name: 'PostCard',
   props: ['post'],
-  components: { TrafficLights },
+  components: { TrafficLights, Avatar },
   methods: {
     canEdit(post) {
       return this.$page.auth.user && this.$page.auth.user.id == post.user_id;
