@@ -16,7 +16,7 @@ class PostController extends Controller {
 
     public function index() {
         return Inertia::render('Posts/Index', [
-            'posts' => Post::with('user:id,name,is_approved,photo_path')->latest()->get(),
+            'posts' => Post::with('user')->latest()->get(),
         ]);
     }
 

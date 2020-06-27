@@ -1,7 +1,7 @@
 <template>
   <img
-    v-if="user.photo_url"
-    :src="user.photo_url"
+    v-if="user.photoUrl"
+    :src="user.photoUrl"
     :alt="user.name"
     class="bg-gray-200 rounded-full"
     :class="sizeClasses"

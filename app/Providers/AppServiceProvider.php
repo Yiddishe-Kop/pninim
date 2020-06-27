@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider {
                         'id' => Auth::user()->id,
                         'name' => Auth::user()->name,
                         'email' => Auth::user()->email,
-                        'photoUrl' => Auth::user()->photoUrl(['w' => 40, 'h' => 40, 'fit' => 'crop']),
+                        'photoUrl' => Auth::user()->photoUrl(['w' => 100, 'h' => 100, 'fit' => 'crop']),
                         'is_approved' => Auth::user()->is_approved,
                         'is_admin' => Auth::user()->is_admin,
                     ] : null,
@@ -51,16 +51,6 @@ class AppServiceProvider extends ServiceProvider {
                 ? Session::get('errors')->getBag('default')->getMessages()
                 : (object) [];
             },
-            'modal' => [
-                'open' => false,
-                'icon' => 'warning',
-                'color' => 'red',
-                'title' => 'Halpern Insurance',
-                'message' => 'Halpern Insurance',
-                'action' => [
-                    'label' => 'Hey!',
-                ],
-            ],
         ]);
     }
 

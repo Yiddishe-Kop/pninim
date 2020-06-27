@@ -70,15 +70,16 @@ class UserController extends Controller {
     public function update(User $user) {
         $this->authorize('update', $user);
         Request::validate([
-            'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($user->id)],
-            'password' => ['nullable'],
-            'photo' => ['nullable', 'image'],
+            'name' => ['required', 'max:255'],
+            'email' => ['required', 'max:255', 'email', Rule::unique('users')->ignore($user->id)],
+            'password' => ['nullable', 'confirmed', 'string', 'min:8'],
+            'avatar' => ['nullable'],
         ]);
 
-        $user->update(Request::only('name', 'email', 'owner'));
+        $user->update(Request::only('name', 'email'));
 
-        if (Request::file('photo')) {
-            $user->update(['photo_path' => Request::file('photo')->store('users')]);
+        if (Request::get('avatar')) {
+            $user->update(['photo_path' => request('avatar')]);
         }
 
         if (Request::get('password')) {

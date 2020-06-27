@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', 'PostController@index');
+
+// Uploads
+Route::post('/upload', 'UploadController');
+
+// Images
+Route::get('/img/{path}', 'ImagesController@show')->where('path', '.*');
+
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('access-denied', 'Auth\LoginController@unapproved');
 

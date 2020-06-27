@@ -25,19 +25,19 @@
             <inertia-link
               class="block px-6 py-2 hover:bg-teal-500 hover:text-white"
               :href="route('users.edit', $page.auth.user.id)"
-              >My Profile</inertia-link
+              >הפרופיל שלי</inertia-link
             >
             <inertia-link
               v-if="$page.auth.user.is_admin"
               class="block px-6 py-2 hover:bg-teal-500 hover:text-white"
               :href="route('users.index')"
-              >Manage Users</inertia-link
+              >ניהול משתמשים</inertia-link
             >
             <inertia-link
               class="block px-6 py-2 hover:bg-teal-500 hover:text-white"
               :href="route('logout')"
               method="post"
-              >Logout</inertia-link
+              >יציאה</inertia-link
             >
           </div>
         </dropdown>
