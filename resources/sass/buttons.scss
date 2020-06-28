@@ -1,3 +1,20 @@
+a,
+button {
+  @apply rounded;
+  &:focus,
+  &:active {
+    @apply shadow-outline-teal;
+  }
+}
+
+.btn-outline {
+  @apply inline-block px-6 py-2 font-bold text-gray-800 bg-gray-100 border-2 border-gray-800 rounded-full;
+  &:hover,
+  &:focus {
+    @apply bg-white;
+  }
+}
+
 .btn-teal {
   @apply px-6 py-3 rounded bg-teal-600 text-white text-sm font-bold whitespace-no-wrap;
 

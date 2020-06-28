@@ -1,23 +1,29 @@
 <template>
-  <article class="relative bg-white shadow-md rounded-xl">
-    <div class="flex justify-between p-3 text-gray-100 bg-gray-800 rounded-t-xl">
+  <article class="relative bg-white shadow-md rounded-xl group">
+    <div :class="[expanded ? 'rounded-t-xl' : 'rounded-xl']" class="flex justify-between p-3 text-gray-100 bg-gray-800">
       <div class="flex items-center">
-        <traffic-lights class="mr-1" />
+        <traffic-lights @yellow="expanded = !expanded" class="mr-1" />
         <icon name="book" class="w-4 mr-4 text-gray-300" />
-        <span class="mr-2 font-light">{{ post.ref }}</span>
+        <a :href="`https://torah.yiddishe-kop.com/torah/${post.ref}`" class="mr-2 font-light" target="_blank">{{
+          post.ref
+        }}</a>
       </div>
       <div class="flex items-center">
-        <avatar :user="post.user" size="sm" />
-        <span class="mr-1.5 text-xs">{{ post.user.name }}</span>
-        <icon v-if="post.user.is_approved" name="badge-check" class="w-5 mr-1 text-teal-300" />
-        <icon name="selector" class="w-5 mr-2 text-gray-300" />
+        <inertia-link :href="route('users.show', post.user.id)" class="flex items-center">
+          <avatar :user="post.user" size="sm" />
+          <span class="mr-1.5 text-xs">{{ post.user.name }}</span>
+          <icon v-if="post.user.is_approved" name="badge-check" class="w-5 mr-1 text-teal-300" />
+        </inertia-link>
+        <button @click="expanded = !expanded" class="mr-2 text-gray-500 transition hover:text-gray-300">
+          <icon name="selector" class="w-5" />
+        </button>
       </div>
     </div>
-    <section class="flex overflow-hidden rounded-b-xl">
-      <nav class="flex flex-col items-center justify-start p-3 pb-8 space-y-2 bg-gray-300">
-        <icon name="user-circle" class="text-gray-400 w-7" />
-        <icon name="chat" class="text-gray-400 w-7" />
-        <icon name="calendar" class="text-gray-400 w-7" />
+    <section v-show="expanded" class="flex overflow-hidden rounded-b-xl">
+      <nav class="flex flex-col items-center justify-start p-3 pb-8 space-y-2 text-gray-400 bg-gray-300">
+        <icon name="user-circle" class="w-7" />
+        <icon name="chat" class="w-7" />
+        <icon name="calendar" class="w-7" />
       </nav>
       <div class="flex-1 p-4 pb-8">
         <h2 class="pt-2 mb-6 text-4xl font-bold leading-7 text-justify text-gray-600 font-siddur">
@@ -26,7 +32,10 @@
         <div class="space-y-2 text-lg leading-snug font-sbl" v-html="format(post.content)"></div>
       </div>
     </section>
-    <div class="absolute bottom-0 flex items-center justify-between transform translate-y-1/2 right-8 left-8">
+    <div
+      v-show="expanded"
+      class="absolute bottom-0 flex items-center justify-between transform translate-y-1/2 right-8 left-8"
+    >
       <button v-if="canEdit(post)" class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg">
         <icon name="edit" class="w-5 h-5" />
       </button>
@@ -35,12 +44,32 @@
         <icon name="trash" class="w-5 h-5" />
       </button>
       <div v-else class="flex items-center text-gray-100 bg-gray-800 rounded-full shadow-lg">
-        <button class="p-2 group">
-          <icon name="thumb-up" class="w-5 text-gray-400 group-hover:text-gray-100" />
-        </button>
-        <button class="p-2 pr-0 group">
-          <icon name="thumb-down" class="w-5 text-gray-400 group-hover:text-gray-100" />
-        </button>
+        <inertia-link
+          preserve-state
+          preserve-scroll
+          :href="route('posts.react', post.id)"
+          :data="{ reaction: 'Like' }"
+          method="POST"
+          class="p-2 pl-1 rounded-r-full group"
+        >
+          <span class="pr-1 text-xs font-black text-gray-500 transition group-hover:text-green-400">
+            {{ likes }}
+          </span>
+          <icon name="thumb-up" class="inline w-5 text-gray-400 transition group-hover:text-gray-100" />
+        </inertia-link>
+        <inertia-link
+          preserve-state
+          preserve-scroll
+          :href="route('posts.react', post.id)"
+          :data="{ reaction: 'Dislike' }"
+          method="POST"
+          class="p-2 pr-1 rounded-l-full group"
+        >
+          <icon name="thumb-down" class="inline w-5 text-gray-400 transition group-hover:text-gray-100" />
+          <span class="text-xs font-black text-gray-500 transition group-hover:text-orange-400">
+            {{ dislikes }}
+          </span>
+        </inertia-link>
       </div>
     </div>
   </article>
@@ -54,6 +83,28 @@ export default {
   name: 'PostCard',
   props: ['post'],
   components: { TrafficLights, Avatar },
+  data() {
+    return {
+      expanded: true,
+    };
+  },
+  computed: {
+    reactionTypes() {
+      return this.$page.reactionTypes;
+    },
+    likes() {
+      const likesReaction = this.post.love_reactant.reaction_counters.filter(
+        i => this.reactionTypes[i.reaction_type_id].name == 'Like'
+      );
+      return likesReaction.length ? likesReaction[0].count : 0;
+    },
+    dislikes() {
+      const dislikesReaction = this.post.love_reactant.reaction_counters.filter(
+        i => this.reactionTypes[i.reaction_type_id].name == 'Dislike'
+      );
+      return dislikesReaction.length ? dislikesReaction[0].count : 0;
+    },
+  },
   methods: {
     format(content) {
       return content

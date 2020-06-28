@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rule;
@@ -51,6 +52,22 @@ class UserController extends Controller {
         ]);
 
         return Redirect::route('users')->with('success', 'User created.');
+    }
+
+    public function show(User $user) {
+        $posts = $user->posts()
+            ->with('loveReactant.reactionCounters')
+            ->paginate(20);
+        // manually set the user relation to each post (as no need to refetch from the DB)
+        collect($posts->items())->map->setRelation('user', $user);
+        return Inertia::render('Users/Show', [
+            'user' => $user,
+            'posts' => $posts,
+            'reactionTypes' => ReactionType::select('id', 'name')->get()->keyBy('id'),
+            'counts' => [
+                'posts' => $posts->count(),
+            ],
+        ]);
     }
 
     public function edit(User $user) {

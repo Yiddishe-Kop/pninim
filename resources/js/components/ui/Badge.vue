@@ -37,6 +37,10 @@ export default {
           badgeClasses += 'bg-gray-100 text-gray-800';
           dotClasses += 'text-gray-400';
           break;
+        case 'dark-gray':
+          badgeClasses += 'bg-gray-700 text-gray-200';
+          dotClasses += 'text-gray-300';
+          break;
         case 'red':
           badgeClasses += 'bg-red-100 text-red-800';
           dotClasses += 'text-red-400';

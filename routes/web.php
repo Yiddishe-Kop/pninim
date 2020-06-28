@@ -43,6 +43,7 @@ Route::middleware('approved')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::post('/posts/{post}/react', 'ReactionController')->name('posts.react');
 
 });
 

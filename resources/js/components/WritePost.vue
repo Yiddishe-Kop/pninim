@@ -3,9 +3,9 @@
     @submit.prevent="submit"
     class="relative flex items-start justify-center space-y-2 bg-white shadow-xl rounded-xl"
   >
-    <div class="p-4">
+    <inertia-link :href="route('users.show', user.id)" class="p-4">
       <avatar :user="user" />
-    </div>
+    </inertia-link>
     <div class="flex-1 p-3 pr-0">
       <textarea
         v-model="post.title"

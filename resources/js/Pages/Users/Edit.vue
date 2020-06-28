@@ -35,7 +35,7 @@ export default {
         },
         {
           type: 'image',
-          // uploadBehavior: 'delayed',
+          uploadBehavior: 'delayed',
           name: 'avatar',
           label: 'תמונת פרופיל',
           validation: 'mime:image/jpeg,image/png',

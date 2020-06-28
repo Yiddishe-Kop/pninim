@@ -28,10 +28,10 @@ export default {
     },
     textSizeClass() {
       const sizes = {
-        sm: 'text-xs',
-        md: 'text-sm',
-        lg: 'text-base',
-        xl: 'text-md',
+        sm: 'text-sm',
+        md: 'text-md',
+        lg: 'text-lg',
+        xl: 'text-3xl',
       };
       return sizes[this.size] || sizes.lg;
     },

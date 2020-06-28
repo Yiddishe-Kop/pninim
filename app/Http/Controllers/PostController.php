@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -16,7 +17,8 @@ class PostController extends Controller {
 
     public function index() {
         return Inertia::render('Posts/Index', [
-            'posts' => Post::with('user')->latest()->get(),
+            'posts' => Post::with(['user', 'loveReactant.reactionCounters'])->latest()->get(),
+            'reactionTypes' => ReactionType::select('id', 'name')->get()->keyBy('id'),
         ]);
     }
 

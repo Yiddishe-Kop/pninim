@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
+use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
@@ -9,15 +11,15 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use League\Glide\Server;
 
-class User extends Authenticatable {
-    use Notifiable;
+class User extends Authenticatable implements ReacterableContract {
+    use Notifiable, Reacterable;
 
     protected $fillable = [
         'name', 'email', 'password', 'photo_path',
     ];
 
     protected $hidden = [
-        'password', 'remember_token', 'email_verified_at', 'updated_at',
+        'password', 'remember_token', 'email_verified_at', 'updated_at', 'photo_path',
     ];
 
     protected $casts = [
@@ -27,6 +29,10 @@ class User extends Authenticatable {
     ];
 
     protected $appends = ['photoUrl'];
+
+    public function profile() {
+        return $this->hasOne(Profile::class);
+    }
 
     public function posts() {
         return $this->hasMany(Post::class);
