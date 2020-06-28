@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="relative p-4 bg-white shadow-xl rounded-xl">
-      <img src="/storage/gemara.jpg" class="relative z-0 object-cover w-full h-48 rounded-lg" />
+      <img src="/img/gemara.jpg" class="relative z-0 object-cover w-full h-48 rounded-lg" />
       <avatar :user="user" size="xl" class="relative z-10 block mr-10 -mt-10 text-white shadow-solid" />
 
       <inertia-link

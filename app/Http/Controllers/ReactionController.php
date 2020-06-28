@@ -9,11 +9,18 @@ class ReactionController extends Controller {
     public function __invoke(Post $post) {
         /**  @var  Cog\Contracts\Love\Reacter\Facades\Reacter $reactorFacade */
         $reactorFacade = request()->user()->viaLoveReacter();
+        $reactionType = request('reaction');
 
-        if ($reactorFacade->hasReactedTo($post, request('reaction'))) {
-            $reactorFacade->unreactTo($post, request('reaction'));
+        if ($reactorFacade->hasReactedTo($post, $reactionType)) {
+            $reactorFacade->unreactTo($post, $reactionType);
         } else {
-            $reactorFacade->reactTo($post, request('reaction'));
+            // mutually exclusive reactions
+            if ($reactionType == 'Like' && $reactorFacade->hasReactedTo($post, 'Dislike')) {
+                $reactorFacade->unreactTo($post, 'Dislike');
+            } else if ($reactionType == 'Dislike' && $reactorFacade->hasReactedTo($post, 'Like')) {
+                $reactorFacade->unreactTo($post, 'Like');
+            }
+            $reactorFacade->reactTo($post, $reactionType);
         }
         return redirect()->back();
     }
