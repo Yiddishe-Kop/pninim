@@ -6,7 +6,7 @@ import { InertiaApp } from '@inertiajs/inertia-vue'
 import Icon from '@/components/ui/Icon'
 import Badge from '@/components/ui/Badge'
 import BaseButton from '@/components/ui/BaseButton'
-import AutoSize from './helpers/autosizeDirective'
+import AutoSize from 'vue-auto-resize'
 
 Vue.config.productionTip = false
 

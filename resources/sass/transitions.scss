@@ -27,6 +27,18 @@
   transform: translateY(10px);
 }
 
+// Fade transition
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.3s ease-in;
+  opacity: 0.95;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
 // Modal transition
 .modal-fade-enter-active,
 .modal-fade-leave-active {

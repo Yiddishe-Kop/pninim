@@ -8,6 +8,8 @@
       </inertia-link>
       <p class="text-xs text-gray-600">לוקח בערך 5 שניות</p>
     </div>
+
+    <portal-target name="overlay" slim />
     <posts-list :posts="posts" />
   </div>
 </template>

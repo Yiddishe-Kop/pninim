@@ -31,6 +31,8 @@
         </div>
       </div>
     </div>
+
+    <portal-target name="overlay" slim />
     <posts-list :posts="posts.data" />
   </div>
 </template>

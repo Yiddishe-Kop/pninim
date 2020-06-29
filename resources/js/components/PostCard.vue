@@ -1,5 +1,11 @@
 <template>
-  <article class="relative bg-white shadow-md rounded-xl group">
+  <article :class="{ 'z-50': mode == 'edit' }" class="relative bg-white shadow-md rounded-xl group">
+    <portal to="overlay" v-if="mode == 'edit'">
+      <transition name="fade">
+        <div @click="mode = 'read'" class="fixed inset-0 z-10 bg-gray-500 bg-opacity-75"></div>
+      </transition>
+    </portal>
+
     <div :class="[expanded ? 'rounded-t-xl' : 'rounded-xl']" class="flex justify-between p-3 text-gray-100 bg-gray-800">
       <div class="flex items-center">
         <traffic-lights @yellow="expanded = !expanded" class="mr-1" />
@@ -94,6 +100,7 @@
 <script>
 import TrafficLights from './ui/TrafficLights';
 import Avatar from './ui/Avatar';
+import d from '../../../vendor/scrivo/highlight.php/Highlight/languages/d.json';
 
 export default {
   name: 'PostCard',
