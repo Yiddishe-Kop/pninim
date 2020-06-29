@@ -26,22 +26,38 @@
         <icon name="calendar" class="w-7" />
       </nav>
       <div class="flex-1 p-4 pb-8">
-        <h2 class="pt-2 mb-6 text-4xl font-bold leading-7 text-justify text-gray-600 font-siddur">
-          {{ post.title }}
-        </h2>
-        <div class="space-y-2 text-lg leading-snug font-sbl" v-html="format(post.content)"></div>
+        <div v-if="mode == 'read'">
+          <h2 class="pt-2 mb-6 text-4xl font-bold leading-7 text-justify text-gray-600 font-siddur">
+            {{ post.title }}
+          </h2>
+          <div class="space-y-2 text-lg leading-snug font-sbl" v-html="format(post.content)"></div>
+        </div>
+        <div v-else class="pr-0 space-y-4">
+          <textarea
+            v-model="postEdit.title"
+            placeholder="ציטוט מהגמרא..."
+            class="h-20 text-2xl title font-siddur"
+            v-auto-resize
+          ></textarea>
+          <textarea
+            v-model="postEdit.content"
+            placeholder="מה אתה מחדש היום?"
+            class="text-lg content h-36 font-sbl"
+            v-auto-resize
+          ></textarea>
+        </div>
       </div>
     </section>
     <div
       v-show="expanded"
       class="absolute bottom-0 flex items-center justify-between transform translate-y-1/2 right-8 left-8"
     >
-      <button v-if="canEdit(post)" class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg">
-        <icon name="edit" class="w-5 h-5" />
-      </button>
-      <span v-else></span>
       <button v-if="canEdit(post)" @click="destroy" class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg">
         <icon name="trash" class="w-5 h-5" />
+      </button>
+      <span v-else></span>
+      <button v-if="canEdit(post)" @click="handleEdit" class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg">
+        <icon :name="mode == 'read' ? 'edit' : 'check'" class="w-5 h-5" />
       </button>
       <div v-else class="flex items-center text-gray-100 bg-gray-800 rounded-full shadow-lg">
         <inertia-link
@@ -86,6 +102,11 @@ export default {
   data() {
     return {
       expanded: true,
+      mode: 'read',
+      postEdit: {
+        title: this.post.title,
+        content: this.post.content,
+      },
     };
   },
   computed: {
@@ -108,7 +129,7 @@ export default {
   methods: {
     format(content) {
       return content
-        .replace(/\*{2}(.+?)\*{2}/g, '<strong class="text-xl text-gray-900 font-siddur">$1</strong>') // **bold**
+        .replace(/\*{2}(.+?)\*{2}/g, '<strong class="text-xl leading-3 text-gray-900 font-siddur">$1</strong>') // **bold**
         .replace(/(\(.+?\))/g, '<small class="text-sm text-gray-700">$1</small>') // סוגריים
         .split('\n')
         .map(p => `<p>${p}</p>`)
@@ -116,6 +137,17 @@ export default {
     },
     canEdit(post) {
       return this.$page.auth.user && this.$page.auth.user.id == post.user_id;
+    },
+    async handleEdit() {
+      if (this.mode == 'read') {
+        this.mode = 'edit';
+      } else {
+        await this.$inertia.put(this.route('posts.update', this.post.id), this.postEdit, {
+          preserveScroll: true,
+          preserveState: true,
+        });
+        this.mode = 'read';
+      }
     },
     destroy() {
       this.$inertia.delete(this.route('posts.destroy', this.post.id));

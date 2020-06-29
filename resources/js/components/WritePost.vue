@@ -3,16 +3,22 @@
     @submit.prevent="submit"
     class="relative flex items-start justify-center space-y-2 bg-white shadow-xl rounded-xl"
   >
-    <inertia-link :href="route('users.show', user.id)" class="p-4">
+    <inertia-link :href="route('users.show', user.id)" class="m-4 rounded-full">
       <avatar :user="user" />
     </inertia-link>
-    <div class="flex-1 p-3 pr-0">
+    <div class="flex-1 p-3 pr-0 space-y-4">
       <textarea
         v-model="post.title"
+        v-auto-resize
         placeholder="ציטוט מהגמרא..."
         class="h-20 pt-2 text-2xl title font-siddur"
       ></textarea>
-      <textarea v-model="post.content" placeholder="מה אתה מחדש היום?" class="text-lg content h-36 font-sbl"></textarea>
+      <textarea
+        v-model="post.content"
+        v-auto-resize
+        placeholder="מה אתה מחדש היום?"
+        class="text-lg content h-36 font-sbl"
+      ></textarea>
       <input type="text" v-model="post.ref" placeholder="מראה מקום" class="text-sm ref" />
       <button
         type="submit"

@@ -49,7 +49,14 @@ class PostController extends Controller {
     }
 
     public function update(Request $request, Post $post) {
-        //
+        $this->authorize('update', $post);
+        $post->update(
+            $request->validate([
+                'title' => 'required|max:255|string',
+                'content' => 'required|max:512|string',
+            ])
+        );
+        return redirect()->back()->with('success', 'Post updated!');
     }
 
     public function destroy(Post $post) {

@@ -57,8 +57,9 @@ class UserController extends Controller {
     public function show(User $user) {
         $posts = $user->posts()
             ->with('loveReactant.reactionCounters')
+            ->latest()
             ->paginate(20);
-        // manually set the user relation to each post (as no need to refetch from the DB)
+        // manually set the user relation to each post (as no need to refetch from the DB - optimization)
         collect($posts->items())->map->setRelation('user', $user);
         return Inertia::render('Users/Show', [
             'user' => $user,

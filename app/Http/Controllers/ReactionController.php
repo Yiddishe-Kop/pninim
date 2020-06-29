@@ -11,6 +11,7 @@ class ReactionController extends Controller {
         $reactorFacade = request()->user()->viaLoveReacter();
         $reactionType = request('reaction');
 
+        // if already reacted this reaction: toggle
         if ($reactorFacade->hasReactedTo($post, $reactionType)) {
             $reactorFacade->unreactTo($post, $reactionType);
         } else {

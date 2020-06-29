@@ -6,6 +6,7 @@ import { InertiaApp } from '@inertiajs/inertia-vue'
 import Icon from '@/components/ui/Icon'
 import Badge from '@/components/ui/Badge'
 import BaseButton from '@/components/ui/BaseButton'
+import AutoSize from './helpers/autosizeDirective'
 
 Vue.config.productionTip = false
 
@@ -17,6 +18,7 @@ Vue.use(VueFormulate, {
   uploadUrl: '/upload'
 })
 
+Vue.directive('auto-resize', AutoSize)
 
 Vue.mixin({ methods: { route: window.route } })
 Vue.use(PortalVue)
