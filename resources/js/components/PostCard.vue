@@ -100,7 +100,6 @@
 <script>
 import TrafficLights from './ui/TrafficLights';
 import Avatar from './ui/Avatar';
-import d from '../../../vendor/scrivo/highlight.php/Highlight/languages/d.json';
 
 export default {
   name: 'PostCard',
