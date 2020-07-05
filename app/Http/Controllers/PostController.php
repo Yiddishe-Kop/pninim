@@ -30,8 +30,8 @@ class PostController extends Controller {
 
         $post = auth()->user()->posts()->create(
             $request->validate([
-                'title' => 'required',
-                'content' => 'required',
+                'title' => 'required|max:255|string',
+                'content' => 'required|max:5096|string',
                 'ref' => 'required',
                 'status' => 'nullable',
             ])
@@ -53,7 +53,7 @@ class PostController extends Controller {
         $post->update(
             $request->validate([
                 'title' => 'required|max:255|string',
-                'content' => 'required|max:512|string',
+                'content' => 'required|max:5096|string',
             ])
         );
         return redirect()->back()->with('success', 'Post updated!');
