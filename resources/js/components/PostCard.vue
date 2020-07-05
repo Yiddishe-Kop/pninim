@@ -149,6 +149,7 @@ export default {
         this.mode = 'edit';
       } else {
         await this.$inertia.put(this.route('posts.update', this.post.id), this.postEdit, {
+          // this is amazing 👇
           preserveScroll: true,
           preserveState: true,
         });
