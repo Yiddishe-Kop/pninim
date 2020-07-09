@@ -8,7 +8,7 @@
 
     <div :class="[expanded ? 'rounded-t-xl' : 'rounded-xl']" class="flex justify-between p-3 text-gray-100 bg-gray-800">
       <div class="flex items-center">
-        <traffic-lights @yellow="expanded = !expanded" class="mr-1" />
+        <traffic-lights @red="() => (canEdit(post) ? destroy() : '')" @yellow="expanded = !expanded" class="mr-1" />
         <icon name="book" class="w-4 mr-4 text-gray-300" />
         <a :href="`https://torah.yiddishe-kop.com/torah/${post.ref}`" class="mr-2 font-light" target="_blank">{{
           post.ref
@@ -19,6 +19,8 @@
           <avatar :user="post.user" size="sm" />
           <span class="mr-1.5 text-xs">{{ post.user.name }}</span>
           <icon v-if="post.user.is_approved" name="badge-check" class="w-5 mr-1 text-teal-300" />
+          <span class="mx-1 font-bold text-gray-400">&middot;</span>
+          <span class="text-xs text-gray-300">{{ post.created_at }}</span>
         </inertia-link>
         <button @click="expanded = !expanded" class="mr-2 text-gray-500 transition hover:text-gray-300">
           <icon name="selector" class="w-5" />
@@ -157,7 +159,10 @@ export default {
       }
     },
     destroy() {
-      this.$inertia.delete(this.route('posts.destroy', this.post.id));
+      this.$inertia.delete(this.route('posts.destroy', this.post.id), {
+        preserveScroll: true,
+        preserveState: true,
+      });
     },
   },
 };

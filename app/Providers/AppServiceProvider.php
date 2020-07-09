@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,7 @@ class AppServiceProvider extends ServiceProvider {
     }
 
     public function boot() {
-        //
+        Carbon::setLocale('he');
     }
 
     public function registerInertia() {
