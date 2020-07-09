@@ -7,6 +7,11 @@ use App\Post;
 class ReactionController extends Controller {
 
     public function __invoke(Post $post) {
+
+        if (request()->user()->id == $post->user->id) {
+            return redirect()->back()->with('error', 'You can\'t react to your own posts.');
+        }
+
         /**  @var  Cog\Contracts\Love\Reacter\Facades\Reacter $reactorFacade */
         $reactorFacade = request()->user()->viaLoveReacter();
         $reactionType = request('reaction');

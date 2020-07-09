@@ -19,9 +19,9 @@
           <avatar :user="post.user" size="sm" />
           <span class="mr-1.5 text-xs">{{ post.user.name }}</span>
           <icon v-if="post.user.is_approved" name="badge-check" class="w-5 mr-1 text-teal-300" />
-          <span class="mx-1 font-bold text-gray-400">&middot;</span>
-          <span class="text-xs text-gray-300">{{ post.created_at }}</span>
         </inertia-link>
+        <span class="mx-1 font-bold text-gray-400">&middot;</span>
+        <span class="text-xs text-gray-300">{{ post.created_at }}</span>
         <button @click="expanded = !expanded" class="mr-2 text-gray-500 transition hover:text-gray-300">
           <icon name="selector" class="w-5" />
         </button>
@@ -64,11 +64,12 @@
         <icon name="trash" class="w-5 h-5" />
       </button>
       <span v-else></span>
-      <button v-if="canEdit(post)" @click="handleEdit" class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg">
-        <icon :name="mode == 'read' ? 'edit' : 'check'" class="w-5 h-5" />
-      </button>
-      <div v-else class="flex items-center text-gray-100 bg-gray-800 rounded-full shadow-lg">
-        <inertia-link
+      <div class="flex items-center text-gray-100 bg-gray-800 rounded-full shadow-lg">
+        <button v-if="canEdit(post)" @click="handleEdit" class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg">
+          <icon :name="mode == 'read' ? 'edit' : 'check'" class="w-5 h-5" />
+        </button>
+        <component
+          :is="canEdit(post) ? 'div' : 'InertiaLink'"
           preserve-state
           preserve-scroll
           :href="route('posts.react', post.id)"
@@ -80,8 +81,9 @@
             {{ likes }}
           </span>
           <icon name="thumb-up" class="inline w-5 text-gray-400 transition group-hover:text-gray-100" />
-        </inertia-link>
-        <inertia-link
+        </component>
+        <component
+          :is="canEdit(post) ? 'div' : 'InertiaLink'"
           preserve-state
           preserve-scroll
           :href="route('posts.react', post.id)"
@@ -93,7 +95,7 @@
           <span class="text-xs font-black text-gray-500 transition group-hover:text-orange-400">
             {{ dislikes }}
           </span>
-        </inertia-link>
+        </component>
       </div>
     </div>
   </article>
