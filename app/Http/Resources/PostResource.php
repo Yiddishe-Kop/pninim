@@ -15,7 +15,7 @@ class PostResource extends JsonResource {
             'created_at' => $this->created_at,
             'username' => $this->user->name,
             'avatar' => $this->user->photoUrl,
-            'reactions' => $this->loveReactant->reactionCounters->map->only(['count', 'weight', 'reactant_type_id']),
+            'reactions' => $this->loveReactant->reactionCounters->map->only(['count', 'weight', 'reaction_type_id']),
         ];
 
     }
