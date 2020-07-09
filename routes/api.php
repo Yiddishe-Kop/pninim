@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/posts', function () {
     return response()->json(
         PostResource::collection(
-            Post::latest()->get()
+            Post::latest()->limit(8)->get()
         )
     );
 });
