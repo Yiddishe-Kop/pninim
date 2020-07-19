@@ -48,8 +48,11 @@ export default {
   components: { Avatar, SourceSelectModal },
   data() {
     return {
-      showModal: true,
-      post: {},
+      post: {
+        title: '',
+        ref: '',
+        content: '',
+      },
       user: this.$page.auth.user,
     };
   },
@@ -57,19 +60,16 @@ export default {
     passesValidation() {
       return ['title', 'content', 'ref'].filter(f => !!this.post[f]).length == 3;
     },
-  },
-  watch: {
-    'post.title': {
-      handler: function(title) {
-        this.showModal = !title;
-      },
+    showModal() {
+      if (this.post.title) return false;
+      return !this.post.title || /^\s*$/.test(this.post.title);
     },
   },
   methods: {
     async handleSelection(e) {
       this.post.ref = e.ref;
-      this.post.title = e.text;
-      this.showModal = false;
+      this.$set(this.post, 'title', e.text);
+      console.log(e, this.post.title);
       await this.$nextTick();
       this.$refs.titleInput.dispatchEvent(new Event('change')); // trigger event to resize textarea
     },

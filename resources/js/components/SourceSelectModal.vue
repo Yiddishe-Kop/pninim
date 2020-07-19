@@ -1,72 +1,77 @@
 <template>
-  <section class="z-50 flex">
+  <section v-show="tractates && tractates.length" class="z-50 flex select-none">
     <div class="p-1 overflow-hidden bg-teal-500 rounded-lg shadow-2xl">
       <span class="absolute z-0 w-4 h-4 transform rotate-45 -translate-y-1/2 bg-teal-500 right-20"></span>
-      <transition name="slide">
-        <!-- TRACTATES -->
-        <ul
-          v-if="selected.tractate == undefined"
-          class="relative z-10 p-1 space-y-1 overflow-y-auto bg-white rounded max-h-60"
-        >
-          <li
-            v-for="(tractate, i) in tractates"
-            :key="tractate"
-            @click="selected.tractate = i"
-            :class="[selected.tractate == i ? 'bg-blue-200 hover:bg-blue-300' : 'bg-gray-100 hover:bg-teal-200']"
-            class="flex items-center justify-between px-3 py-2 text-gray-900 bg-gray-100 rounded outline-none cursor-pointer focus:shadow-outline-teal hover:text-teal-900"
-            tabindex="0"
-          >
-            <span class="text-3xl font-bold font-siddur">{{ tractate }}</span>
-            <span class="mr-2">
-              <badge>{{ numToDaf(dafim[i].length).replace(/[\.:]/, '') }} דפים</badge>
-              <icon name="cheveron-right" class="inline w-4 -ml-1 transform rotate-180" />
-            </span>
-          </li>
-        </ul>
-        <!-- DAFIM -->
-        <ul
-          v-else-if="selected.daf == undefined"
-          class="relative z-10 p-1 space-y-1 overflow-y-auto bg-white rounded max-h-60"
-        >
-          <button @click="selected.tractate = undefined" class="flex items-center py-1">
-            <icon name="cheveron-right" class="inline w-4" />
-            <span>{{ selectedTractate }}</span>
-          </button>
-          <li
-            v-for="(daf, i) in dafim[selected.tractate]"
-            :key="`${i}-${daf}`"
-            @click="selected.daf = i"
-            :class="[selected.daf == i ? 'bg-blue-200 hover:bg-blue-300' : 'bg-gray-100 hover:bg-teal-200']"
-            class="flex items-center justify-between px-3 py-2 text-gray-900 bg-gray-100 rounded outline-none cursor-pointer focus:shadow-outline-teal hover:text-teal-900"
-            tabindex="0"
-          >
-            <span class="text-3xl font-bold font-siddur">{{ numToDaf(i) }}</span>
-            <span class="mr-2">
-              <badge>{{ daf }} חלקים</badge>
-              <icon name="cheveron-right" class="inline w-4 -ml-1 transform rotate-180" />
-            </span>
-          </li>
-        </ul>
-        <!-- SECTIONS -->
-        <article
-          v-else
-          class="relative z-10 p-4 pt-2 overflow-y-auto text-xl leading-8 text-justify text-gray-900 bg-white rounded max-h-60"
-        >
-          <button @click="selected.daf = undefined" class="flex items-center py-1">
-            <icon name="cheveron-right" class="inline w-4" />
-            <span>{{ selectedDaf }}</span>
-          </button>
-          <span
-            v-for="(section, i) in sections"
-            :key="`${i}-${section.slice(0, 10)}`"
-            @click="select(i)"
-            :class="[selected.section == i ? 'bg-blue-200 hover:bg-blue-300' : 'hover:bg-teal-200']"
-            class="px-1.5 mx-0.5 py-1 rounded outline-none cursor-pointer font-sbl hover:text-teal-900"
-            v-html="section"
-          >
-          </span>
-        </article>
-      </transition>
+      <div class="relative z-10 overflow-hidden bg-white rounded">
+        <transition :name="goingForward ? 'slide-in' : 'slide-back'">
+          <!-- TRACTATES -->
+          <ul v-if="selected.tractate == undefined" key="tractates" class="p-1 space-y-1 overflow-y-auto max-h-60">
+            <li
+              v-for="(tractate, i) in tractates"
+              :key="tractate"
+              @click="goForward('tractate', i)"
+              :class="[selected.tractate == i ? 'bg-blue-200 hover:bg-blue-300' : 'bg-gray-100 hover:bg-teal-200']"
+              class="flex items-center justify-between px-3 py-2 text-gray-900 bg-gray-100 rounded outline-none cursor-pointer focus:shadow-outline-teal hover:text-teal-900"
+              tabindex="0"
+            >
+              <span class="text-3xl font-bold font-siddur">{{ tractate }}</span>
+              <span class="mr-2">
+                <badge>{{ numToDaf(dafim[i].length) }} דפים</badge>
+                <icon name="cheveron-right" class="inline w-4 -ml-1 transform rotate-180" />
+              </span>
+            </li>
+          </ul>
+          <!-- DAFIM -->
+          <ul v-else-if="selected.daf == undefined" key="dafim">
+            <div
+              @click="goBack('tractate')"
+              class="flex items-center px-3 py-2 bg-teal-700 cursor-pointer text-teal-50"
+            >
+              <icon name="cheveron-right" class="inline w-4" />
+              <span class="mr-2 font-bold">{{ selectedTractate }}</span>
+            </div>
+            <div class="p-1 space-y-1 overflow-y-auto max-h-60">
+              <li
+                v-for="(daf, i) in dafim[selected.tractate]"
+                :key="`${i}-${daf}`"
+                @click="goForward('daf', i)"
+                :class="[selected.daf == i ? 'bg-blue-200 hover:bg-blue-300' : 'bg-gray-100 hover:bg-teal-200']"
+                class="flex items-center justify-between px-3 py-2 text-gray-900 bg-gray-100 rounded outline-none cursor-pointer focus:shadow-outline-teal hover:text-teal-900"
+                tabindex="0"
+              >
+                <span class="text-3xl font-bold font-siddur">{{ numToDaf(i) }}</span>
+                <span class="mr-12">
+                  <badge>{{ daf }} חלקים</badge>
+                  <icon name="cheveron-right" class="inline w-4 -ml-1 transform rotate-180" />
+                </span>
+              </li>
+            </div>
+          </ul>
+          <!-- SECTIONS -->
+          <article v-else key="sections">
+            <div @click="goBack('daf')" class="flex items-center px-3 py-2 bg-teal-700 cursor-pointer text-teal-50">
+              <icon name="cheveron-right" class="inline w-4" />
+              <span class="mr-2 font-bold">{{ selectedTractate }}</span>
+              <span class="mr-2">/</span>
+              <span class="mr-2 font-bold">{{ selectedDaf }}</span>
+            </div>
+            <div v-if="!sections || !sections.length" class="px-48 py-12">
+              <loader />
+            </div>
+            <p v-else class="p-4 pt-2 overflow-y-auto text-xl leading-8 text-justify text-gray-900 max-h-60">
+              <span
+                v-for="(section, i) in sections"
+                :key="`${i}-${section.slice(0, 10)}`"
+                @click="select(i)"
+                :class="[selected.section == i ? 'bg-blue-200 hover:bg-blue-300' : 'hover:bg-teal-200']"
+                class="px-1.5 mx-0.5 py-1 rounded outline-none cursor-pointer font-sbl hover:text-teal-900"
+                v-html="section"
+              >
+              </span>
+            </p>
+          </article>
+        </transition>
+      </div>
     </div>
   </section>
 </template>
@@ -84,6 +89,7 @@ export default {
         daf: undefined,
         section: undefined,
       },
+      goingForward: true,
     };
   },
   computed: {
@@ -97,6 +103,14 @@ export default {
     },
   },
   methods: {
+    goForward(section, i) {
+      this.goingForward = true;
+      this.selected[section] = i;
+    },
+    goBack(section) {
+      this.goingForward = false;
+      this.selected[section] = undefined;
+    },
     select(i) {
       this.selected.section = i;
       this.$emit('select', {

@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"2190579071c875ee8661","1":"67af4bd802bfd8df8f63","2":"395175c181ce1111973d","3":"e0b09fbe0ce93e82825a","4":"99d4ec190fc5994e1e67","5":"8a60928202201ca77584","6":"2dc60a2a3e8b13a673e1","7":"8f71c578f4610b48946f","8":"1a07e9d6825e16757e11","9":"441dd58f9479c7630b1b","10":"20404bf656fe31fb40ce"}[chunkId] + ""
+/******/ 		return __webpack_require__.p + "js/" + ({}[chunkId]||chunkId) + ".js?id=" + {"0":"2190579071c875ee8661","1":"67af4bd802bfd8df8f63","2":"6bbc8c1cc5ede12498ce","3":"e0b09fbe0ce93e82825a","4":"99d4ec190fc5994e1e67","5":"63ee4c4bfbee97ffa227","6":"2dc60a2a3e8b13a673e1","7":"8f71c578f4610b48946f","8":"1a07e9d6825e16757e11","9":"441dd58f9479c7630b1b","10":"20404bf656fe31fb40ce"}[chunkId] + ""
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -4106,7 +4106,9 @@ const handler = e => {
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   bind(el) {
-    el.addEventListener('input', handler)
+    ['input', 'change'].forEach(event => {
+      el.addEventListener(event, handler)
+    })
   },
 
   inserted(el) {
@@ -4114,7 +4116,9 @@ const handler = e => {
   },
 
   unbind(el) {
-    el.removeEventListener('input', handler)
+    ['input', 'change'].forEach(event => {
+      el.removeEventListener(event, handler)
+    })
   }
 });
 
