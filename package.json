@@ -29,6 +29,6 @@
     "portal-vue": "^2.1.7",
     "tailwindcss": "^1.4.6",
     "vue": "^2.6.11",
-    "vue-auto-resize": "^1.0.0"
+    "vue-auto-resize": "^1.0.1"
   }
 }

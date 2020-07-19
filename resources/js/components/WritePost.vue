@@ -12,6 +12,7 @@
         v-auto-resize
         placeholder="ציטוט מהגמרא..."
         class="h-20 pt-2 text-2xl title font-siddur"
+        ref="titleInput"
       ></textarea>
       <textarea
         v-model="post.content"
@@ -27,18 +28,27 @@
       >
         שלח
       </button>
+      <transition name="modal-fade">
+        <source-select-modal
+          v-show="showModal"
+          @select="handleSelection"
+          class="absolute left-0 right-0 -mx-4 top-12"
+        />
+      </transition>
     </div>
   </form>
 </template>
 
 <script>
 import Avatar from './ui/Avatar';
+import SourceSelectModal from './SourceSelectModal';
 
 export default {
   name: 'WritePost',
-  components: { Avatar },
+  components: { Avatar, SourceSelectModal },
   data() {
     return {
+      showModal: true,
       post: {},
       user: this.$page.auth.user,
     };
@@ -48,7 +58,21 @@ export default {
       return ['title', 'content', 'ref'].filter(f => !!this.post[f]).length == 3;
     },
   },
+  watch: {
+    'post.title': {
+      handler: function(title) {
+        this.showModal = !title;
+      },
+    },
+  },
   methods: {
+    async handleSelection(e) {
+      this.post.ref = e.ref;
+      this.post.title = e.text;
+      this.showModal = false;
+      await this.$nextTick();
+      this.$refs.titleInput.dispatchEvent(new Event('change')); // trigger event to resize textarea
+    },
     async submit() {
       this.passesValidation && (await this.$inertia.post(this.route('posts.store'), this.post));
       this.post = {};
