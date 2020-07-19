@@ -1,5 +1,8 @@
 <template>
-  <article :class="{ 'z-50': mode == 'edit' }" class="relative bg-white shadow-md rounded-xl group">
+  <article
+    :class="{ 'z-50': mode == 'edit', 'opacity-25': post.deleted_at }"
+    class="relative bg-white shadow-md rounded-xl group"
+  >
     <portal to="overlay" v-if="mode == 'edit'">
       <transition name="fade">
         <div @click="mode = 'read'" class="fixed inset-0 z-10 bg-gray-500 bg-opacity-75"></div>
@@ -10,9 +13,9 @@
       <div class="flex items-center">
         <traffic-lights @red="() => (canEdit(post) ? destroy() : '')" @yellow="expanded = !expanded" class="mr-1" />
         <icon name="book" class="w-4 mr-4 text-gray-300" />
-        <a :href="`https://torah.yiddishe-kop.com/torah/${post.ref}`" class="mr-2 font-light" target="_blank">{{
-          post.ref
-        }}</a>
+        <a :href="`https://torah.yiddishe-kop.com/torah/${post.ref}`" class="mr-2 font-light" target="_blank">
+          {{ post.ref }}
+        </a>
       </div>
       <div class="flex items-center">
         <inertia-link :href="route('users.show', post.user.id)" class="flex items-center">
@@ -33,7 +36,7 @@
         <icon name="chat" class="w-7" />
         <icon name="calendar" class="w-7" />
       </nav>
-      <div class="flex-1 p-4 pb-8">
+      <div class="relative flex-1 p-4 pb-8">
         <div v-if="mode == 'read'">
           <h2 class="pt-2 mb-6 text-4xl font-bold leading-7 text-justify text-gray-600 font-siddur">
             {{ post.title }}
@@ -60,8 +63,12 @@
       v-show="expanded"
       class="absolute bottom-0 flex items-center justify-between transform translate-y-1/2 right-8 left-8"
     >
-      <button v-if="canEdit(post)" @click="destroy" class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg">
-        <icon name="trash" class="w-5 h-5" />
+      <button
+        v-if="canEdit(post)"
+        @click="() => (post.deleted_at ? restore() : destroy())"
+        class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg"
+      >
+        <icon :name="post.deleted_at ? 'check-circle' : 'trash'" class="w-5 h-5" />
       </button>
       <span v-else></span>
       <div class="flex items-center text-gray-100 bg-gray-800 rounded-full shadow-lg">
@@ -161,7 +168,15 @@ export default {
       }
     },
     destroy() {
+      console.log(`???`);
       this.$inertia.delete(this.route('posts.destroy', this.post.id), {
+        preserveScroll: true,
+        preserveState: true,
+      });
+    },
+    restore() {
+      console.log(`!!!`);
+      this.$inertia.put(this.route('posts.restore', this.post.id), {
         preserveScroll: true,
         preserveState: true,
       });

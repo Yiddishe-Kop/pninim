@@ -1,6 +1,6 @@
 <template>
-  <section v-show="tractates && tractates.length" class="z-50 flex select-none">
-    <div class="p-1 overflow-hidden bg-teal-500 rounded-lg shadow-2xl">
+  <section v-show="tractates && tractates.length" class="z-50 flex pointer-events-none select-none">
+    <div class="p-1 overflow-hidden bg-teal-500 rounded-lg shadow-2xl pointer-events-auto">
       <span class="absolute z-0 w-4 h-4 transform rotate-45 -translate-y-1/2 bg-teal-500 right-20"></span>
       <div class="relative z-10 overflow-hidden bg-white rounded">
         <transition :name="goingForward ? 'slide-in' : 'slide-back'">

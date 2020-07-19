@@ -5,10 +5,10 @@ namespace App;
 use Carbon\Carbon;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model implements ReactableContract {
-    use Reactable;
+    use Reactable, SoftDeletes;
 
     protected $guarded = [];
 

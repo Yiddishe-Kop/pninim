@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
+Route::put('posts/{post}/restore', 'PostController@restore')->name('posts.restore');
 Route::resources([
     'posts' => 'PostController',
     'users' => 'UserController',

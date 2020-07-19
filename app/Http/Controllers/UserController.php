@@ -56,6 +56,9 @@ class UserController extends Controller {
 
     public function show(User $user) {
         $posts = $user->posts()
+            ->when(optional(auth()->user())->is($user), function ($query) {
+                return $query->withTrashed();
+            })
             ->with('loveReactant.reactionCounters')
             ->latest()
             ->paginate(20);

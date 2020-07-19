@@ -43,7 +43,7 @@ class PostController extends Controller {
             ])
         );
 
-        return redirect()->back()->with('success', 'Post created!' . $post->title);
+        return back()->with('success', 'Post created!' . $post->title);
     }
 
     public function show(Post $post) {
@@ -62,11 +62,18 @@ class PostController extends Controller {
                 'content' => 'required|max:5096|string',
             ])
         );
-        return redirect()->back()->with('success', 'Post updated!');
+        return back()->with('success', 'Post updated!');
     }
 
     public function destroy(Post $post) {
+        $this->authorize('delete', $post);
         $post->delete();
-        return redirect()->back()->with('success', 'Post deleted!' . $post->title);
+        return back()->with('success', 'Post deleted!' . $post->title);
+    }
+
+    public function restore(Post $post) {
+        $this->authorize('restore', $post);
+        $post->restore();
+        return back()->with('success', 'Post restored!' . $post->title);
     }
 }

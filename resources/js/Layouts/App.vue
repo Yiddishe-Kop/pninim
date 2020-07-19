@@ -52,7 +52,9 @@
         <section class="md:col-span-6">
           <slot />
         </section>
-        <aside class="sticky p-5 bg-gray-200 shadow-inner md:col-span-2 top-24 rounded-xl"></aside>
+        <aside class="sticky p-5 bg-gray-200 shadow-inner md:col-span-2 top-24 rounded-xl">
+          <portal-target name="left-sidebar" />
+        </aside>
       </div>
     </main>
     <footer class="px-6 py-4 text-xs text-center text-gray-200 bg-gray-700">

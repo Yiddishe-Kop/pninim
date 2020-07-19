@@ -30,7 +30,7 @@ class PostPolicy {
     }
 
     public function restore(User $user, Post $post) {
-        //
+        return $user->is($post->user) || $user->is_admin;
     }
 
     public function forceDelete(User $user, Post $post) {

@@ -13,6 +13,8 @@
         placeholder="ציטוט מהגמרא..."
         class="h-20 pt-2 text-2xl title font-siddur"
         ref="titleInput"
+        @focus="isTitleInputActive = true"
+        @blur="isTitleInputActive = false"
       ></textarea>
       <textarea
         v-model="post.content"
@@ -54,6 +56,7 @@ export default {
         content: '',
       },
       user: this.$page.auth.user,
+      isTitleInputActive: false,
     };
   },
   computed: {
@@ -61,7 +64,7 @@ export default {
       return ['title', 'content', 'ref'].filter(f => !!this.post[f]).length == 3;
     },
     showModal() {
-      if (this.post.title) return false;
+      if (!this.isTitleInputActive || this.post.title) return false;
       return !this.post.title || /^\s*$/.test(this.post.title);
     },
   },
@@ -77,6 +80,10 @@ export default {
       this.passesValidation && (await this.$inertia.post(this.route('posts.store'), this.post));
       this.post = {};
     },
+  },
+  async mounted() {
+    await this.$nextTick();
+    this.$refs.titleInput.focus();
   },
 };
 </script>
