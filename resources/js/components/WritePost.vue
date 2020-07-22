@@ -2,6 +2,8 @@
   <form
     @submit.prevent="submit"
     class="relative flex items-start justify-center space-y-2 bg-white shadow-xl rounded-xl"
+    @mouseenter="mouseOverWriteForm = true"
+    @mouseleave="mouseOverWriteForm = false"
   >
     <inertia-link :href="route('users.show', user.id)" class="m-4 rounded-full">
       <avatar :user="user" />
@@ -13,8 +15,7 @@
         placeholder="ציטוט מהגמרא..."
         class="h-20 pt-2 text-2xl title font-siddur"
         ref="titleInput"
-        @focus="isTitleInputActive = true"
-        @blur="isTitleInputActive = false"
+        @focus="mouseOverWriteForm = true"
       ></textarea>
       <textarea
         v-model="post.content"
@@ -56,7 +57,7 @@ export default {
         content: '',
       },
       user: this.$page.auth.user,
-      isTitleInputActive: false,
+      mouseOverWriteForm: false,
     };
   },
   computed: {
@@ -64,7 +65,7 @@ export default {
       return ['title', 'content', 'ref'].filter(f => !!this.post[f]).length == 3;
     },
     showModal() {
-      if (!this.isTitleInputActive || this.post.title) return false;
+      if (!this.mouseOverWriteForm || this.post.title) return false;
       return !this.post.title || /^\s*$/.test(this.post.title);
     },
   },
