@@ -3,7 +3,7 @@
     <div class="p-1 overflow-hidden bg-teal-500 rounded-lg shadow-2xl pointer-events-auto">
       <span class="absolute z-0 w-4 h-4 transform rotate-45 -translate-y-1/2 bg-teal-500 right-20"></span>
       <div class="relative z-10 overflow-hidden bg-white rounded">
-        <transition :name="goingForward ? 'slide-in' : 'slide-back'">
+        <transition v-if="tractates.length" :name="goingForward ? 'slide-in' : 'slide-back'">
           <!-- TRACTATES -->
           <ul v-if="selected.tractate == undefined" key="tractates" class="p-1 space-y-1 overflow-y-auto max-h-60">
             <li
@@ -71,6 +71,10 @@
             </p>
           </article>
         </transition>
+        <div v-else class="w-56 py-16">
+          <loader />
+          <p class="mt-3 text-xs text-center text-teal-700">טוען הש״ס</p>
+        </div>
       </div>
     </div>
   </section>
