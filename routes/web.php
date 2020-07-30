@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::put('posts/{post}/restore', 'PostController@restore')->name('posts.restore');
+Route::delete('posts/{post}/force', 'PostController@forceDelete')->name('posts.forceDelete');
 Route::resources([
     'posts' => 'PostController',
     'users' => 'UserController',

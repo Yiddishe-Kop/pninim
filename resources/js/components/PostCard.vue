@@ -67,12 +67,27 @@
         v-if="canEdit(post)"
         @click="() => (post.deleted_at ? restore() : destroy())"
         class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg"
+        title="Restore"
       >
         <icon :name="post.deleted_at ? 'check-circle' : 'trash'" class="w-5 h-5" />
       </button>
+      <inertia-link
+        v-if="post.deleted_at"
+        :href="route('posts.forceDelete', post.id)"
+        method="delete"
+        class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg"
+        title="Delete permanently"
+      >
+        <icon name="trash" class="w-5 h-5" />
+      </inertia-link>
       <span v-else></span>
       <div class="flex items-center text-gray-100 bg-gray-800 rounded-full shadow-lg">
-        <button v-if="canEdit(post)" @click="handleEdit" class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg">
+        <button
+          v-if="canEdit(post)"
+          @click="handleEdit"
+          class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg"
+          title="Edit"
+        >
           <icon :name="mode == 'read' ? 'edit' : 'check'" class="w-5 h-5" />
         </button>
         <component
@@ -132,13 +147,13 @@ export default {
     },
     likes() {
       const likesReaction = this.post.love_reactant.reaction_counters.filter(
-        i => this.reactionTypes[i.reaction_type_id].name == 'Like'
+        (i) => this.reactionTypes[i.reaction_type_id].name == 'Like'
       );
       return likesReaction.length ? likesReaction[0].count : 0;
     },
     dislikes() {
       const dislikesReaction = this.post.love_reactant.reaction_counters.filter(
-        i => this.reactionTypes[i.reaction_type_id].name == 'Dislike'
+        (i) => this.reactionTypes[i.reaction_type_id].name == 'Dislike'
       );
       return dislikesReaction.length ? dislikesReaction[0].count : 0;
     },
@@ -149,7 +164,7 @@ export default {
         .replace(/\*{2}(.+?)\*{2}/g, '<strong class="text-xl leading-3 text-gray-900 font-siddur">$1</strong>') // **bold**
         .replace(/(\(.+?\))/g, '<small class="text-sm text-gray-700">$1</small>') // סוגריים
         .split('\n')
-        .map(p => `<p>${p}</p>`)
+        .map((p) => `<p>${p}</p>`)
         .join('');
     },
     canEdit(post) {

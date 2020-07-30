@@ -34,6 +34,6 @@ class PostPolicy {
     }
 
     public function forceDelete(User $user, Post $post) {
-        //
+        return $user->is($post->user) || $user->is_admin;
     }
 }

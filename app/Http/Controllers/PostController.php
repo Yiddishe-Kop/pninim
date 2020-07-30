@@ -71,6 +71,12 @@ class PostController extends Controller {
         return back()->with('success', 'Post deleted!' . $post->title);
     }
 
+    public function forceDelete(Post $post) {
+        $this->authorize('forceDelete', $post);
+        $post->forceDelete();
+        return back()->with('success', 'Post permanently deleted!');
+    }
+
     public function restore(Post $post) {
         $this->authorize('restore', $post);
         $post->restore();
