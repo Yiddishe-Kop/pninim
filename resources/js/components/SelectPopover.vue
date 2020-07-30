@@ -1,6 +1,12 @@
 <template>
-  <div v-if="show" ref="selectionPopover" class="absolute" :style="style">
-    <slot />
+  <div ref="selectionPopover" class="absolute" :style="style">
+    <div :class="[bgColor]" class="relative z-10">
+      <slot />
+    </div>
+    <span
+      :class="[bgColor]"
+      class="absolute bottom-0 left-0 right-0 z-0 w-2 h-2 mx-auto transform rotate-45 translate-y-1/2"
+    ></span>
   </div>
 </template>
 
@@ -17,6 +23,10 @@ export default {
       type: Number,
       default: 30,
     },
+    bgColor: {
+      type: String,
+      default: 'bg-gray-800',
+    },
   },
   data() {
     return {
@@ -29,8 +39,11 @@ export default {
   computed: {
     style() {
       return `
+        opacity: ${this.show ? 1 : 0};
+        pointer-events: ${this.show ? 'all' : 'none'};
         top: ${this.popoverBox.top}px;
         left: ${this.popoverBox.left}px;
+        box-shadow: 0px 0px 0px 2px #ffffff8c;
       `;
     },
   },
@@ -61,6 +74,7 @@ export default {
         this.$emit('select');
         return this.computePopoverBox();
       }
+      console.log('DESELECT!');
       this.$emit('deselect');
     },
     computePopoverBox() {
@@ -68,11 +82,14 @@ export default {
       if (!this.selectionExists()) {
         return;
       }
+      console.log(selection.rangeCount);
       console.log({ selection });
       const selectionBox = selection.getRangeAt(0).getBoundingClientRect();
+      console.log({ selectionBox });
       const popoverBox = this.$refs.selectionPopover.getBoundingClientRect();
+      console.log({ popoverBox });
       const targetBox = document.querySelector('[data-selectable]').getBoundingClientRect();
-      console.log(selectionBox, popoverBox, targetBox);
+      console.log({ targetBox });
       this.popoverBox = {
         top: selectionBox.top - targetBox.top - this.topOffset,
         left: selectionBox.width / 2 - popoverBox.width / 2 + (selectionBox.left - targetBox.left),

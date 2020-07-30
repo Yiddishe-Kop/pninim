@@ -72,8 +72,13 @@
           </article>
         </transition>
         <div v-else class="w-56 py-16">
-          <loader />
-          <p class="mt-3 text-xs text-center text-teal-700">טוען הש״ס</p>
+          <div v-if="error">
+            <p class="text-xs text-center text-teal-700">לא הצלחנו להתחבר לספריא</p>
+          </div>
+          <div v-else>
+            <loader />
+            <p class="mt-3 text-xs text-center text-teal-700">טוען הש״ס</p>
+          </div>
         </div>
       </div>
     </div>
@@ -94,6 +99,7 @@ export default {
         section: undefined,
       },
       goingForward: true,
+      error: undefined,
     };
   },
   computed: {
@@ -151,7 +157,7 @@ export default {
   },
   watch: {
     'selected.daf': {
-      handler: async function(newDaf) {
+      handler: async function (newDaf) {
         const url = `https://www.sefaria.org/api/texts/
           ${this.tractates[this.selected.tractate]}.
           ${this.selectedDaf}`;
@@ -161,9 +167,13 @@ export default {
     },
   },
   async mounted() {
-    const bavli = await (await fetch('https://www.sefaria.org/api/shape/Talmud/Bavli')).json();
-    this.tractates = bavli.map(item => item.heTitle);
-    this.dafim = bavli.map(daf => daf.chapters).map(dafim => dafim.filter((d, i) => i >= 2));
+    try {
+      const bavli = await (await fetch('https://www.sefaria.org/api/shape/Talmud/Bavli')).json();
+      this.tractates = bavli.map((item) => item.heTitle);
+      this.dafim = bavli.map((daf) => daf.chapters).map((dafim) => dafim.filter((d, i) => i >= 2));
+    } catch (error) {
+      this.error = error.message;
+    }
   },
 };
 </script>

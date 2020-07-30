@@ -5,18 +5,20 @@
     </transition-group>
     <div v-else class="my-6 text-center">No posts yet 😬</div>
     <select-popover
-      :top-offset="45"
+      :top-offset="42"
       @select="showPopover = true"
       @deselect="showPopover = false"
       :show="showPopover"
+      bg-color="bg-gray-800"
       ref="selectionPopover"
       class="flex items-center p-1 text-gray-100 bg-gray-800 rounded-md shadow-lg"
+      style="transform: rotate(-6deg);"
     >
-      <button @click="lookupInLexicon" class="p-1 bg-gray-700 rounded hover:bg-gray-600">
-        <icon name="book-open" class="w-5" />
+      <button @click="lookupInLexicon" class="p-1 bg-gray-700 rounded hover:bg-gray-600" title="Lookup Meaning">
+        <icon name="question-circle" class="w-5" />
       </button>
-      <button class="p-1 mr-1 bg-gray-700 rounded hover:bg-gray-600">
-        <icon name="book-open" class="w-5" />
+      <button class="p-1 bg-gray-700 rounded hover:bg-gray-600">
+        <icon name="scale" class="w-5" />
       </button>
     </select-popover>
     <portal to="left-sidebar" v-if="lexicon.translations.length">
