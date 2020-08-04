@@ -74,7 +74,6 @@ export default {
         this.$emit('select');
         return this.computePopoverBox();
       }
-      console.log('DESELECT!');
       this.$emit('deselect');
     },
     computePopoverBox() {
@@ -82,14 +81,9 @@ export default {
       if (!this.selectionExists()) {
         return;
       }
-      console.log(selection.rangeCount);
-      console.log({ selection });
       const selectionBox = selection.getRangeAt(0).getBoundingClientRect();
-      console.log({ selectionBox });
       const popoverBox = this.$refs.selectionPopover.getBoundingClientRect();
-      console.log({ popoverBox });
       const targetBox = document.querySelector('[data-selectable]').getBoundingClientRect();
-      console.log({ targetBox });
       this.popoverBox = {
         top: selectionBox.top - targetBox.top - this.topOffset,
         left: selectionBox.width / 2 - popoverBox.width / 2 + (selectionBox.left - targetBox.left),

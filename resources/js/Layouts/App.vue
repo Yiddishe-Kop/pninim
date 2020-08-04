@@ -23,20 +23,23 @@
             <inertia-link
               class="block px-6 py-2 rounded-none hover:bg-teal-500 hover:text-white"
               :href="route('users.edit', $page.auth.user.id)"
-              >הפרופיל שלי</inertia-link
             >
+              הפרופיל שלי
+            </inertia-link>
             <inertia-link
               v-if="$page.auth.user.is_admin"
               class="block px-6 py-2 rounded-none hover:bg-teal-500 hover:text-white"
               :href="route('users.index')"
-              >ניהול משתמשים</inertia-link
             >
+              ניהול משתמשים
+            </inertia-link>
             <inertia-link
               class="block px-6 py-2 rounded-none hover:bg-teal-500 hover:text-white"
               :href="route('logout')"
               method="post"
-              >יציאה</inertia-link
             >
+              יציאה
+            </inertia-link>
           </div>
         </dropdown>
         <portal-target name="dropdown" slim />
@@ -48,11 +51,11 @@
     <main class="flex-1 w-full">
       <div class="sticky top-0 z-0 bg-gray-100 h-96"></div>
       <div class="relative z-10 grid items-start max-w-5xl gap-8 px-2 py-12 mx-auto md:grid-cols-10 -mt-96">
-        <aside class="sticky p-5 bg-gray-200 shadow-inner md:col-span-2 top-24 rounded-xl"></aside>
+        <aside class="sticky p-5 overflow-hidden bg-gray-200 rounded-lg shadow-inner md:col-span-2 top-24"></aside>
         <section class="md:col-span-6">
           <slot />
         </section>
-        <aside class="sticky p-5 bg-gray-200 shadow-inner md:col-span-2 top-24 rounded-xl">
+        <aside class="sticky p-2 overflow-hidden bg-gray-200 rounded-lg shadow-inner md:col-span-2 top-24">
           <portal-target name="left-sidebar" />
         </aside>
       </div>

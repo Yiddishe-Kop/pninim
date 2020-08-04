@@ -24,9 +24,16 @@
     <portal to="left-sidebar" v-if="lexicon.translations.length">
       <div class="space-y-3">
         <div v-for="t in lexicon.translations" :key="t.strong_number">
-          <h2 class="p-1 mb-1 font-bold bg-gray-100 border-b border-gray-500 rounded-t">{{ t.headword }}</h2>
+          <h2 class="p-1 mb-1 -m-2 font-extrabold text-gray-100 bg-gray-800 border-b border-gray-500">
+            {{ t.headword }}
+          </h2>
           <ul class="space-y-1">
-            <li v-for="item in t.content.senses" :key="Math.random()" v-html="item.definition" class="text-xs"></li>
+            <li
+              v-for="item in t.content.senses"
+              :key="Math.random()"
+              v-html="item.definition"
+              class="text-xs text-justify"
+            ></li>
           </ul>
         </div>
       </div>
