@@ -24,7 +24,7 @@ class UserController extends Controller {
                         'email' => $user->email,
                         'is_approved' => $user->is_approved,
                         'is_admin' => $user->is_admin,
-                        'photo' => $user->photoUrl(['w' => 40, 'h' => 40, 'fit' => 'crop']),
+                        'photoUrl' => $user->photoUrl,
                     ];
                 }),
         ]);

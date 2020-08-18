@@ -2,11 +2,11 @@
   font-family: "siddur";
   font-weight: 100 900;
   font-style: normal;
-  src: url("/fonts/SiddurOCGX.ttf") format("ttf"), url("/fonts/SiddurOCGX.woff2") format("woff2");
+  src: url("/fonts/SiddurOCGX.otf") format("otf"), url("/fonts/SiddurOCGX.woff2") format("woff2");
 }
 @font-face {
   font-family: "SBLhebrew";
-  src: url("/fonts/SBL_Hbrw.ttf") format("ttf"), url("/fonts/SBL_Hbrw.woff2") format("woff2");
+  src: url("/fonts/SBL_Hbrw.otf") format("otf"), url("/fonts/SBL_Hbrw.woff2") format("woff2");
 }
 @font-face {
   font-family: "Heebo var"; // variable font! [https://github.com/TypeNetwork/heebo]
@@ -14,7 +14,7 @@
   font-style: normal;
   font-named-instance: "Regular";
   font-display: swap;
-  src: url("/fonts/Heebo-beta-VF.ttf");
+  src: url("/fonts/Heebo-beta-VF.otf");
 }
 
 .font-siddur {

@@ -74,6 +74,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -353,7 +358,7 @@ var render = function() {
                                 )
                               }
                             },
-                            [_vm._v("הפרופיל שלי")]
+                            [_vm._v("\n            הפרופיל שלי\n          ")]
                           ),
                           _vm._v(" "),
                           _vm.$page.auth.user.is_admin
@@ -364,7 +369,11 @@ var render = function() {
                                     "block px-6 py-2 rounded-none hover:bg-teal-500 hover:text-white",
                                   attrs: { href: _vm.route("users.index") }
                                 },
-                                [_vm._v("ניהול משתמשים")]
+                                [
+                                  _vm._v(
+                                    "\n            ניהול משתמשים\n          "
+                                  )
+                                ]
                               )
                             : _vm._e(),
                           _vm._v(" "),
@@ -378,7 +387,7 @@ var render = function() {
                                 method: "post"
                               }
                             },
-                            [_vm._v("יציאה")]
+                            [_vm._v("\n            יציאה\n          ")]
                           )
                         ],
                         1
@@ -417,7 +426,7 @@ var render = function() {
           [
             _c("aside", {
               staticClass:
-                "sticky p-5 bg-gray-200 shadow-inner md:col-span-2 top-24 rounded-xl"
+                "sticky p-5 overflow-hidden bg-gray-200 rounded-lg shadow-inner md:col-span-2 top-24"
             }),
             _vm._v(" "),
             _c(
@@ -427,10 +436,15 @@ var render = function() {
               2
             ),
             _vm._v(" "),
-            _c("aside", {
-              staticClass:
-                "sticky p-5 bg-gray-200 shadow-inner md:col-span-2 top-24 rounded-xl"
-            })
+            _c(
+              "aside",
+              {
+                staticClass:
+                  "sticky p-2 overflow-hidden bg-gray-200 rounded-lg shadow-inner md:col-span-2 top-24"
+              },
+              [_c("portal-target", { attrs: { name: "left-sidebar" } })],
+              1
+            )
           ]
         )
       ]),
@@ -474,7 +488,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.user.photoUrl
     ? _c("img", {
-        staticClass: "bg-gray-200 rounded-full",
+        staticClass: "inline-block bg-gray-200 rounded-full",
         class: _vm.sizeClasses,
         attrs: { src: _vm.user.photoUrl, alt: _vm.user.name }
       })

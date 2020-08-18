@@ -3,7 +3,7 @@
     v-if="user.photoUrl"
     :src="user.photoUrl"
     :alt="user.name"
-    class="bg-gray-200 rounded-full"
+    class="inline-block bg-gray-200 rounded-full"
     :class="sizeClasses"
   />
 
