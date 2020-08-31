@@ -51,7 +51,7 @@
     <main class="flex-1 w-full">
       <div class="sticky top-0 z-0 bg-gray-100 h-96"></div>
       <div class="relative z-10 grid items-start max-w-5xl gap-8 px-2 py-12 mx-auto md:grid-cols-10 -mt-96">
-        <aside class="sticky p-5 overflow-hidden bg-gray-200 rounded-lg shadow-inner md:col-span-2 top-24">
+        <aside class="sticky p-2 overflow-hidden bg-gray-200 rounded-lg shadow-inner md:col-span-2 top-24">
           <portal-target name="right-sidebar" />
         </aside>
         <section class="md:col-span-6">

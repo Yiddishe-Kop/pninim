@@ -16,6 +16,7 @@
 
   @inertia
 
+  <x-twemoji />
 </body>
 
 </html>

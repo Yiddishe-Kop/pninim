@@ -18,12 +18,24 @@
         @focus="mouseOverWriteForm = true"
       ></textarea>
       <p v-if="$page.errors.title" class="text-xs text-red-500">{{ $page.errors.title[0] }}</p>
-      <textarea
-        v-model="post.content"
-        v-auto-resize
-        placeholder="מה אתה מחדש היום?"
-        class="text-lg content h-36 font-sbl"
-      ></textarea>
+      <div class="relative">
+        <textarea
+          v-model="post.content"
+          v-auto-resize
+          placeholder="מה אתה מחדש היום?"
+          class="text-lg content h-36 font-sbl"
+        ></textarea>
+        <div class="absolute top-0 left-0 p-2 -mt-2 group">
+          <icon name="info" class="w-4 text-gray-500 group-hover:text-gray-800" />
+          <div
+            class="absolute p-1.5 mt-1 leading-tight hidden -mr-1 w-48 z-30 text-xs text-gray-100 bg-gray-800 rounded-md group-hover:block"
+          >
+            <p>תומך <strong>MD</strong> (חלקי)</p>
+            <p>להדגשה: **טקסט**</p>
+            <p>טקסט בסוגריים יוקטנו אוטומטית.</p>
+          </div>
+        </div>
+      </div>
       <p v-if="$page.errors.content" class="text-xs text-red-500">{{ $page.errors.content[0] }}</p>
       <input type="text" v-model="post.ref" placeholder="מראה מקום" class="text-sm ref" />
       <button

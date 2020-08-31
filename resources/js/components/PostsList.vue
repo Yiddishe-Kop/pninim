@@ -23,8 +23,8 @@
     </select-popover>
     <portal to="left-sidebar">
       <h1 class="mt-0.5 mb-4 text-4xl text-center font-siddur leading-none">אוצר מילים</h1>
-      <div v-if="!lexicon.translations.length">
-        <p class="mt-2 text-sm leading-tight">
+      <div v-if="!lexicon.translations.length" class="p-2 rounded shadow pt-0.5 bg-gray-100">
+        <p class="mt-2 text-xs leading-tight">
           בחר מילים שאתה לא מבין, ולחץ על האייקון
           <icon name="question-circle" class="inline w-4 text-teal-500" /> כדי לקבל התרגום וההסבר באנגלית.
         </p>
