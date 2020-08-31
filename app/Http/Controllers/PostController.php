@@ -36,7 +36,7 @@ class PostController extends Controller {
 
         $post = auth()->user()->posts()->create(
             $request->validate([
-                'title' => 'required|max:255|string',
+                'title' => 'required|max:1024|string',
                 'content' => 'required|max:5096|string',
                 'ref' => 'required',
                 'status' => 'nullable',
@@ -58,7 +58,7 @@ class PostController extends Controller {
         $this->authorize('update', $post);
         $post->update(
             $request->validate([
-                'title' => 'required|max:255|string',
+                'title' => 'required|max:1024|string',
                 'content' => 'required|max:5096|string',
             ])
         );

@@ -60,8 +60,11 @@
         </aside>
       </div>
     </main>
-    <footer class="px-6 py-4 text-xs text-center text-gray-200 bg-gray-700">
-      &copy; {{ new Date().getFullYear() }} by Yehuda Neufeld
+    <footer class="flex items-center justify-between px-6 py-4 text-xs text-gray-200 bg-gray-700">
+      <div>&copy; {{ new Date().getFullYear() }} by Yehuda Neufeld</div>
+      <div class="p-2 text-gray-900 bg-white rounded">
+        Powered by Sefaria
+      </div>
     </footer>
   </div>
 </template>

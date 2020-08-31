@@ -17,12 +17,14 @@
         ref="titleInput"
         @focus="mouseOverWriteForm = true"
       ></textarea>
+      <p v-if="$page.errors.title" class="text-xs text-red-500">{{ $page.errors.title[0] }}</p>
       <textarea
         v-model="post.content"
         v-auto-resize
         placeholder="מה אתה מחדש היום?"
         class="text-lg content h-36 font-sbl"
       ></textarea>
+      <p v-if="$page.errors.content" class="text-xs text-red-500">{{ $page.errors.content[0] }}</p>
       <input type="text" v-model="post.ref" placeholder="מראה מקום" class="text-sm ref" />
       <button
         type="submit"
@@ -52,9 +54,9 @@ export default {
   data() {
     return {
       post: {
-        title: '',
-        ref: '',
-        content: '',
+        title: this.$page.old.title || '',
+        ref: this.$page.old.ref || '',
+        content: this.$page.old.content || '',
       },
       user: this.$page.auth.user,
       mouseOverWriteForm: false,
@@ -62,7 +64,7 @@ export default {
   },
   computed: {
     passesValidation() {
-      return ['title', 'content', 'ref'].filter(f => !!this.post[f]).length == 3;
+      return ['title', 'content', 'ref'].filter((f) => !!this.post[f]).length == 3;
     },
     showModal() {
       if (!this.mouseOverWriteForm || this.post.title) return false;
@@ -79,7 +81,7 @@ export default {
     },
     async submit() {
       this.passesValidation && (await this.$inertia.post(this.route('posts.store'), this.post));
-      this.post = {};
+      // this.post = {};
     },
   },
   async mounted() {
