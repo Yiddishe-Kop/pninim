@@ -66,9 +66,9 @@ export default {
   data() {
     return {
       post: {
-        title: this.$page.old.title || '',
-        ref: this.$page.old.ref || '',
-        content: this.$page.old.content || '',
+        title: '',
+        ref: '',
+        content: '',
       },
       user: this.$page.auth.user,
       mouseOverWriteForm: false,
@@ -92,8 +92,12 @@ export default {
       this.$refs.titleInput.dispatchEvent(new Event('change')); // trigger event to resize textarea
     },
     async submit() {
-      this.passesValidation && (await this.$inertia.post(this.route('posts.store'), this.post));
-      // this.post = {};
+      if (!this.passesValidation) return;
+      const res = await this.$inertia.post(this.route('posts.store'), this.post);
+      const errors = this.$page.errors;
+      if (!errors.title && !errors.content && !errors.ref) {
+        this.post = {};
+      }
     },
   },
   async mounted() {
