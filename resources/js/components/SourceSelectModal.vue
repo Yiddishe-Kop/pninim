@@ -5,7 +5,11 @@
       <div class="relative z-10 overflow-hidden bg-white rounded">
         <transition v-if="tractates.length" :name="goingForward ? 'slide-in' : 'slide-back'">
           <!-- TRACTATES -->
-          <ul v-if="selected.tractate == undefined" key="tractates" class="p-1 space-y-1 overflow-y-auto max-h-60">
+          <ul
+            v-if="selected.tractate == undefined"
+            key="tractates"
+            class="p-1 space-y-1 overflow-y-auto custom-scrollbar max-h-60"
+          >
             <li
               v-for="(tractate, i) in tractates"
               :key="tractate"
@@ -30,7 +34,7 @@
               <icon name="cheveron-right" class="inline w-4" />
               <span class="mr-2 font-bold">{{ selectedTractate }}</span>
             </div>
-            <div class="p-1 space-y-1 overflow-y-auto max-h-60">
+            <div class="p-1 space-y-1 overflow-y-auto custom-scrollbar max-h-60">
               <li
                 v-for="(daf, i) in dafim[selected.tractate]"
                 :key="`${i}-${daf}`"
@@ -58,7 +62,10 @@
             <div v-if="!sections || !sections.length" class="px-48 py-12">
               <loader />
             </div>
-            <p v-else class="p-4 pt-2 overflow-y-auto text-xl leading-8 text-justify text-gray-900 max-h-60">
+            <p
+              v-else
+              class="p-4 pt-2 overflow-y-auto text-xl leading-8 text-justify text-gray-900 custom-scrollbar max-h-60"
+            >
               <span
                 v-for="(section, i) in sections"
                 :key="`${i}-${section.slice(0, 10)}`"

@@ -21,10 +21,17 @@
         <icon name="scale" class="w-5" />
       </button>
     </select-popover>
-    <portal to="left-sidebar" v-if="lexicon.translations.length">
-      <div class="space-y-3">
+    <portal to="left-sidebar">
+      <h1 class="mt-0.5 mb-4 text-4xl text-center font-siddur leading-none">אוצר מילים</h1>
+      <div v-if="!lexicon.translations.length">
+        <p class="mt-2 text-sm leading-tight">
+          בחר מילים שאתה לא מבין, ולחץ על האייקון
+          <icon name="question-circle" class="inline w-4 text-teal-500" /> כדי לקבל התרגום וההסבר באנגלית.
+        </p>
+      </div>
+      <div v-else class="space-y-3 overflow-y-auto max-h-96">
         <div v-for="t in lexicon.translations" :key="t.strong_number">
-          <h2 class="p-1 mb-1 -m-2 font-extrabold text-gray-100 bg-gray-800 border-b border-gray-500">
+          <h2 class="p-1 mb-1 font-extrabold text-gray-100 bg-gray-800 border-b border-gray-500">
             {{ t.headword }}
           </h2>
           <ul class="space-y-1">

@@ -95,12 +95,12 @@
 }
 
 // scrollbar
-::-webkit-scrollbar {
+.custom-scrollbar::-webkit-scrollbar {
   width: 10px;
   height: 10px;
   @apply bg-teal-50 rounded-full;
 }
-::-webkit-scrollbar-thumb {
+.custom-scrollbar::-webkit-scrollbar-thumb {
   width: 10px;
   @apply bg-teal-600 rounded-full;
 
@@ -109,10 +109,10 @@
   }
 }
 
-::-webkit-scrollbar-resizer {
+.custom-scrollbar::-webkit-scrollbar-resizer {
   display: none;
 }
-::-webkit-scrollbar-button {
+.custom-scrollbar::-webkit-scrollbar-button {
   height: 0px;
 }
 
