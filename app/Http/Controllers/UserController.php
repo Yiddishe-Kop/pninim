@@ -60,6 +60,7 @@ class UserController extends Controller {
                 return $query->withTrashed();
             })
             ->with('loveReactant.reactionCounters')
+            ->where('created_at', '>', now()->subMonths(2))
             ->latest()
             ->paginate(20);
         // manually set the user relation to each post (as no need to refetch from the DB - optimization)

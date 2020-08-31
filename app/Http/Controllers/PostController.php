@@ -20,7 +20,8 @@ class PostController extends Controller {
             'posts' => Post::with([
                 'user',
                 'loveReactant.reactionCounters',
-            ])->latest()
+            ])->where('created_at', '>', now()->subMonths(2))
+                ->latest()
                 ->get(),
             'reactionTypes' => ReactionType::select('id', 'name')
                 ->get()
