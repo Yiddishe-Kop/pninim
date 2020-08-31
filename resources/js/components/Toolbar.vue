@@ -31,7 +31,6 @@
 
 <script>
 import VueSlider from 'vue-slider-component';
-import 'vue-slider-component/theme/default.css';
 
 export default {
   name: 'Toolbar',
@@ -52,6 +51,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

@@ -12,7 +12,7 @@
         ערוך פרופיל
       </inertia-link>
 
-      <div class="p-4 ">
+      <div class="p-4">
         <h1 class="text-lg font-extrabold">
           {{ user.name }}
           <icon v-if="user.is_approved" name="badge-check" class="inline w-5 text-teal-500" />
@@ -54,6 +54,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

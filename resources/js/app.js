@@ -8,6 +8,7 @@ import Loader from '@/components/ui/Loader'
 import Badge from '@/components/ui/Badge'
 import BaseButton from '@/components/ui/BaseButton'
 import AutoSize from 'vue-auto-resize'
+import 'vue-slider-component/theme/default.css';
 
 Vue.config.productionTip = false
 

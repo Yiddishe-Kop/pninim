@@ -89,6 +89,3 @@ export default {
   components: { Logo, Dropdown, Avatar },
 };
 </script>
-
-<style>
-</style>
