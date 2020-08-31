@@ -1,25 +1,41 @@
 <template>
-  <div class="fixed left-8 right-8 bottom-8">
-    <section
-      class="flex items-center justify-between max-w-xl p-4 mx-auto text-sm font-bold text-gray-800 bg-white rounded-lg shadow-outline-teal"
-    >
-      <div class="flex items-center">
+  <section class="flex flex-col space-y-4 text-sm font-bold text-gray-800">
+    <div class="space-y-2 leading-tight">
+      <p class="font-semibold">הפונט הפרמטרי העברי המשוכלל בעולם 🌍 .</p>
+      <p class="font-normal">נסו לשחק עם הפרמטרים 💡</p>
+    </div>
+    <div>
+      <div class="flex items-center justify-between">
         <span>עובי</span>
-        <input type="range" v-model="weight" min="100" max="900" class="mx-1.5" />
-        <span class="text-teal-300">{{ weight }}</span>
+        <span class="text-gray-600">{{ weight }}</span>
       </div>
-      <div class="flex items-center">
+      <vue-slider tooltip="none" v-model="weight" direction="rtl" :min="100" :max="900"></vue-slider>
+    </div>
+    <div class="relative z-10">
+      <div class="flex items-center justify-between">
         <span>רוחב</span>
-        <input type="range" v-model="width" min="100" max="900" class="mx-1.5" />
-        <span class="text-teal-300">{{ width }}</span>
+        <span class="text-gray-600">{{ width }}</span>
       </div>
-    </section>
-  </div>
+      <vue-slider tooltip="none" v-model="width" direction="rtl" :min="100" :max="900"></vue-slider>
+    </div>
+    <div class="relative z-0 w-full pt-4 pb-8 overflow-x-auto no-scrollbar">
+      <p class="text-6xl leading-10 font-siddur" :style="`font-variation-settings: 'wght' ${weight}, 'wdth' ${width};`">
+        אבגדה וזחטיכ למנסע פצקרש תךםןץ
+      </p>
+    </div>
+    <p class="text-xs font-normal text-gray-600">
+      &copy; 2020 <a href="https://yiddishe-kop.com" target="_blank" class="underline">יידישע קאפ</a>
+    </p>
+  </section>
 </template>
 
 <script>
+import VueSlider from 'vue-slider-component';
+import 'vue-slider-component/theme/default.css';
+
 export default {
   name: 'Toolbar',
+  components: { VueSlider },
   data() {
     return {
       weight: 600,
@@ -28,10 +44,10 @@ export default {
   },
   watch: {
     weight(weight) {
-      this.$emit('update:weight', weight);
+      document.documentElement.style.setProperty('--siddur-weight', weight);
     },
     width(width) {
-      this.$emit('update:width', width);
+      document.documentElement.style.setProperty('--siddur-width', width);
     },
   },
 };

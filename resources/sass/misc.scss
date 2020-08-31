@@ -119,3 +119,10 @@
 ::selection {
   @apply bg-teal-200; /* WebKit/Blink Browsers */
 }
+
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

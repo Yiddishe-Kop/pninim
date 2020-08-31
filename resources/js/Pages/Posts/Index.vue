@@ -10,9 +10,11 @@
     </div>
 
     <portal-target name="overlay" slim />
-    <posts-list :posts="posts" :font-settings="font" />
+    <posts-list :posts="posts" />
 
-    <toolbar :weight.sync="font.weight" :width.sync="font.width" />
+    <portal to="right-sidebar">
+      <toolbar />
+    </portal>
   </div>
 </template>
 
@@ -27,13 +29,5 @@ export default {
   layout: Layout,
   props: ['posts'],
   components: { PostsList, WritePost, Toolbar },
-  data() {
-    return {
-      font: {
-        weight: 600,
-        width: 100,
-      },
-    };
-  },
 };
 </script>

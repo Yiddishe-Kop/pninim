@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <transition-group v-if="posts.length" name="postList" appear class="block my-12 space-y-8" data-selectable>
-      <post-card v-for="post in posts" :key="post.id" :post="post" :font-settings="fontSettings" />
+      <post-card v-for="post in posts" :key="post.id" :post="post" />
     </transition-group>
     <div v-else class="my-6 text-center">No posts yet 😬</div>
     <select-popover
@@ -49,13 +49,6 @@ export default {
   name: 'PostsList',
   props: {
     posts: Array,
-    fontSettings: {
-      type: Object,
-      default: () => ({
-        weight: 600,
-        width: 100,
-      }),
-    },
   },
   components: { PostCard, SelectPopover },
   data() {

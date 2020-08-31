@@ -20,4 +20,10 @@
 .font-siddur {
   margin-top: -0.4em; // fixes variable-font leading bug
   font-weight: 700;
+  font-variation-settings: "wght" var(--siddur-weight), "wdth" var(--siddur-width);
+}
+
+:root {
+  --siddur-weight: 600;
+  --siddur-width: 100;
 }

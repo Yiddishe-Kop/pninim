@@ -38,10 +38,7 @@
       </nav>
       <div class="relative flex-1 p-4 pb-8">
         <div v-if="mode == 'read'">
-          <h2
-            class="pt-2 mb-6 text-4xl font-bold leading-7 text-justify text-gray-600 font-siddur"
-            :style="`font-variation-settings: 'wght' ${fontSettings.weight}, 'wdth' ${fontSettings.width};`"
-          >
+          <h2 class="pt-2 mb-6 text-4xl font-bold leading-7 text-justify text-gray-600 font-siddur">
             {{ post.title }}
           </h2>
           <div class="space-y-2 text-lg leading-snug font-sbl" v-html="format(post.content)"></div>
@@ -134,13 +131,6 @@ export default {
   name: 'PostCard',
   props: {
     post: Object,
-    fontSettings: {
-      type: Object,
-      default: () => ({
-        weight: 600,
-        width: 100,
-      }),
-    },
   },
   components: { TrafficLights, Avatar },
   data() {

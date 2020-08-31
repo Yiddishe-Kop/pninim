@@ -51,7 +51,9 @@
     <main class="flex-1 w-full">
       <div class="sticky top-0 z-0 bg-gray-100 h-96"></div>
       <div class="relative z-10 grid items-start max-w-5xl gap-8 px-2 py-12 mx-auto md:grid-cols-10 -mt-96">
-        <aside class="sticky p-5 overflow-hidden bg-gray-200 rounded-lg shadow-inner md:col-span-2 top-24"></aside>
+        <aside class="sticky p-5 overflow-hidden bg-gray-200 rounded-lg shadow-inner md:col-span-2 top-24">
+          <portal-target name="right-sidebar" />
+        </aside>
         <section class="md:col-span-6">
           <slot />
         </section>
@@ -62,8 +64,16 @@
     </main>
     <footer class="flex items-center justify-between px-6 py-4 text-xs text-gray-200 bg-gray-700">
       <div>&copy; {{ new Date().getFullYear() }} by Yehuda Neufeld</div>
-      <div class="p-2 text-gray-900 bg-white rounded">
-        Powered by Sefaria
+      <div class="flex flex-row-reverse items-center px-4 py-2 text-gray-900 bg-white rounded">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/The_Sefaria_Project.svg/64px-The_Sefaria_Project.svg.png"
+          alt="Sefaria"
+          class="-m-1 w-7"
+        />
+        <div class="ml-2 text-left">
+          <div class="text-gray-600">Powered by</div>
+          <a href="https://www.sefaria.org.il/?home" target="_blank" class="mt-0.5 text-xl font-bold">Sefaria</a>
+        </div>
       </div>
     </footer>
   </div>
