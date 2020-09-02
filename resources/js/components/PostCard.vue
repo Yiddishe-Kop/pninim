@@ -20,11 +20,11 @@
       <div class="flex items-center">
         <inertia-link :href="route('users.show', post.user.id)" class="flex items-center">
           <avatar :user="post.user" size="sm" />
-          <span class="mr-1.5 text-xs">{{ post.user.name }}</span>
+          <span class="mr-1.5 text-xs font-medium">{{ post.user.name }}</span>
           <icon v-if="post.user.is_approved" name="badge-check" class="w-5 mr-1 text-teal-300" />
         </inertia-link>
         <span class="mx-1 font-bold text-gray-400">&middot;</span>
-        <span class="text-xs text-gray-300">{{ post.created_at }}</span>
+        <span class="text-xs text-gray-400">{{ post.created_at }}</span>
         <button @click="expanded = !expanded" class="mr-2 text-gray-500 transition hover:text-gray-300">
           <icon name="selector" class="w-5" />
         </button>
