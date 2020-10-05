@@ -24,4 +24,13 @@ class CommentController extends Controller {
     return back()->with('success', 'Your comment has been saved successfully!');
   }
 
+  public function replies(Request $request, Comment $comment) {
+    return response()->json($comment->replies);
+  }
+
+  public function destroy(Comment $comment) {
+    $comment->delete();
+    return back()->with('success', 'Your comment has been successfully deleted!');
+  }
+
 }

@@ -1,7 +1,7 @@
 <template>
   <svg class="progress-ring" :width="size" :height="size">
     <circle
-      class="text-teal-600"
+      class="text-blue-600"
       stroke="currentColor"
       :stroke-width="strokeWidth"
       fill="transparent"

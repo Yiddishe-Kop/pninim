@@ -13,7 +13,7 @@
         </p>
 
         <inertia-link
-          class="inline-block px-6 py-2 mt-6 transition bg-teal-200 rounded hover:bg-teal-500 hover:text-white"
+          class="inline-block px-6 py-2 mt-6 transition bg-blue-200 rounded hover:bg-blue-500 hover:text-white"
           :href="route('logout')"
           method="post"
           >יציאה</inertia-link

@@ -13,7 +13,7 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'teal',
+      default: 'blue',
     },
     size: {
       type: String,
@@ -57,9 +57,9 @@ export default {
           badgeClasses += 'bg-green-100 text-green-800';
           dotClasses += 'text-green-400';
           break;
-        case 'teal':
-          badgeClasses += 'bg-teal-100 text-teal-800';
-          dotClasses += 'text-teal-400';
+        case 'blue':
+          badgeClasses += 'bg-blue-100 text-blue-800';
+          dotClasses += 'text-blue-400';
           break;
         case 'blue':
           badgeClasses += 'bg-blue-100 text-blue-800';

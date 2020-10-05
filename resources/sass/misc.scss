@@ -71,14 +71,14 @@
     animation: rotate 0.75s linear infinite;
     svg {
       circle {
-        @apply text-teal-700;
+        @apply text-blue-700;
         stroke: currentColor;
       }
     }
   }
   &.light {
     .loader svg circle {
-      @apply text-teal-300;
+      @apply text-blue-300;
       stroke: currentColor;
     }
   }
@@ -98,14 +98,14 @@
 .custom-scrollbar::-webkit-scrollbar {
   width: 10px;
   height: 10px;
-  @apply bg-teal-50 rounded-full;
+  @apply bg-blue-50 rounded-full;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
   width: 10px;
-  @apply bg-teal-600 rounded-full;
+  @apply bg-blue-600 rounded-full;
 
   &:hover {
-    @apply bg-teal-700;
+    @apply bg-blue-700;
   }
 }
 
@@ -117,7 +117,7 @@
 }
 
 ::selection {
-  @apply bg-teal-200; /* WebKit/Blink Browsers */
+  @apply bg-blue-200; /* WebKit/Blink Browsers */
 }
 
 .no-scrollbar {

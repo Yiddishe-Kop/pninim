@@ -10,7 +10,7 @@
       <div class="flex items-center">
         <traffic-lights @red="() => (canEdit(post) ? destroy() : '')" @yellow="expanded = !expanded" class="mr-1" />
         <icon name="book" class="w-4 mr-4 text-gray-300" />
-        <a :href="`https://torah.yiddishe-kop.com/torah/${post.ref}`" class="mr-2 font-light" target="_blank">
+        <a :href="`https://torah.yiddishe-kop.com/torah/${post.ref}`" class="mr-2 font-light font-sbl" target="_blank">
           {{ post.ref }}
         </a>
       </div>
@@ -18,7 +18,7 @@
         <inertia-link :href="route('users.show', post.user.id)" class="flex items-center">
           <avatar :user="post.user" size="sm" />
           <span class="mr-1.5 text-xs font-medium">{{ post.user.name }}</span>
-          <icon v-if="post.user.is_approved" name="badge-check" class="w-5 mr-1 text-teal-300" />
+          <icon v-if="post.user.is_approved" name="badge-check" class="w-5 mr-1 text-blue-300" />
         </inertia-link>
         <span class="mx-1 font-bold text-gray-400">&middot;</span>
         <span class="text-xs text-gray-400">{{ post.created_at }}</span>
@@ -118,7 +118,7 @@
       </div>
     </section>
 
-    <comments :comments="post.comments" class="pt-6 mx-4 -mt-2">
+    <comments v-show="expanded" :comments="post.comments" class="pt-6 mx-4 -mt-2">
       <write-comment :post-id="post.id" class="relative mt-2" />
     </comments>
   </article>

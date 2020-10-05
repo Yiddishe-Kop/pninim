@@ -9,32 +9,32 @@
         <dropdown class="mr-2" placement="bottom-start">
           <div class="flex items-center cursor-pointer select-none group">
             <div
-              class="text-gray-700 group-hover:text-teal-600 p-0.5 transition rounded-full focus:text-teal-600 whitespace-no-wrap"
-              :class="{ 'border-4 border-teal-300 hover:border-teal-400': $page.auth.user.is_admin }"
+              class="text-gray-700 group-hover:text-blue-600 p-0.5 transition rounded-full focus:text-blue-600 whitespace-no-wrap"
+              :class="{ 'border-4 border-blue-300 hover:border-blue-400': $page.auth.user.is_admin }"
             >
               <avatar :user="$page.auth.user" />
             </div>
           </div>
           <div slot="dropdown" class="mt-2 overflow-hidden text-sm text-gray-900 bg-white rounded shadow-xl">
-            <div class="block px-6 py-2 mb-1 bg-teal-100">
-              <span class="block text-xs leading-3 text-teal-400">שלום רב,</span>
-              <span class="block mt-1 font-bold leading-none text-teal-600 text-md">{{ $page.auth.user.name }}</span>
+            <div class="block px-6 py-2 mb-1 bg-blue-100">
+              <span class="block text-xs leading-3 text-blue-400">שלום רב,</span>
+              <span class="block mt-1 font-bold leading-none text-blue-600 text-md">{{ $page.auth.user.name }}</span>
             </div>
             <inertia-link
-              class="block px-6 py-2 rounded-none hover:bg-teal-500 hover:text-white"
+              class="block px-6 py-2 rounded-none hover:bg-blue-500 hover:text-white"
               :href="route('users.edit', $page.auth.user.id)"
             >
               הפרופיל שלי
             </inertia-link>
             <inertia-link
               v-if="$page.auth.user.is_admin"
-              class="block px-6 py-2 rounded-none hover:bg-teal-500 hover:text-white"
+              class="block px-6 py-2 rounded-none hover:bg-blue-500 hover:text-white"
               :href="route('users.index')"
             >
               ניהול משתמשים
             </inertia-link>
             <inertia-link
-              class="block px-6 py-2 rounded-none hover:bg-teal-500 hover:text-white"
+              class="block px-6 py-2 rounded-none hover:bg-blue-500 hover:text-white"
               :href="route('logout')"
               method="post"
             >

@@ -18,5 +18,7 @@ class Comment extends Model {
     return $this->replies()->count();
   }
 
+  protected $with = ['user'];
+
   protected $appends = ['repliesCount'];
 }

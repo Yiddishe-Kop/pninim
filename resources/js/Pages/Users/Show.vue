@@ -15,7 +15,7 @@
       <div class="p-4">
         <h1 class="text-lg font-extrabold">
           {{ user.name }}
-          <icon v-if="user.is_approved" name="badge-check" class="inline w-5 text-teal-500" />
+          <icon v-if="user.is_approved" name="badge-check" class="inline w-5 text-blue-500" />
         </h1>
         <p class="mt-1 text-sm text-gray-600">
           <span>

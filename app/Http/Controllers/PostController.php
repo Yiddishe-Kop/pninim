@@ -22,7 +22,7 @@ class PostController extends Controller {
                 'comments.replies.user',
                 'comments.user',
                 'loveReactant.reactionCounters',
-            ])->withCount('comments')
+            ])
             ->where('created_at', '>', now()->subMonths(2))
                 ->latest()
                 ->get(),

@@ -26,7 +26,7 @@
       <div v-if="!lexicon.translations.length" class="p-2 rounded shadow pt-0.5 bg-gray-100">
         <p class="mt-2 text-xs leading-tight">
           בחר מילים שאתה לא מבין, ולחץ על האייקון
-          <icon name="question-circle" class="inline w-4 text-teal-500" /> כדי לקבל התרגום וההסבר באנגלית.
+          <icon name="question-circle" class="inline w-4 text-blue-500" /> כדי לקבל התרגום וההסבר באנגלית.
         </p>
       </div>
       <div v-else class="space-y-3 overflow-y-auto max-h-96">

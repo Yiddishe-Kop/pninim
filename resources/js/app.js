@@ -20,6 +20,8 @@ Vue.use(VueFormulate, {
   uploadUrl: '/upload'
 })
 
+Vue.prototype.$axios = axios
+
 Vue.directive('auto-resize', AutoSize)
 
 Vue.mixin({ methods: { route: window.route } })

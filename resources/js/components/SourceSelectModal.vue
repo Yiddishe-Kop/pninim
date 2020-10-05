@@ -1,7 +1,7 @@
 <template>
   <section v-show="tractates && tractates.length" class="z-50 flex pointer-events-none select-none">
-    <div class="p-1 overflow-hidden bg-teal-500 rounded-lg shadow-2xl pointer-events-auto">
-      <span class="absolute z-0 w-4 h-4 transform rotate-45 -translate-y-1/2 bg-teal-500 right-20"></span>
+    <div class="p-1 overflow-hidden bg-blue-500 rounded-lg shadow-2xl pointer-events-auto">
+      <span class="absolute z-0 w-4 h-4 transform rotate-45 -translate-y-1/2 bg-blue-500 right-20"></span>
       <div class="relative z-10 overflow-hidden bg-white rounded">
         <transition v-if="tractates.length" :name="goingForward ? 'slide-in' : 'slide-back'">
           <!-- TRACTATES -->
@@ -14,8 +14,8 @@
               v-for="(tractate, i) in tractates"
               :key="tractate"
               @click="goForward('tractate', i)"
-              :class="[selected.tractate == i ? 'bg-blue-200 hover:bg-blue-300' : 'bg-gray-100 hover:bg-teal-200']"
-              class="flex items-center justify-between px-3 py-2 text-gray-900 bg-gray-100 rounded outline-none cursor-pointer focus:shadow-outline-teal hover:text-teal-900"
+              :class="[selected.tractate == i ? 'bg-blue-200 hover:bg-blue-300' : 'bg-gray-100 hover:bg-blue-200']"
+              class="flex items-center justify-between px-3 py-2 text-gray-900 bg-gray-100 rounded outline-none cursor-pointer focus:shadow-outline-blue hover:text-blue-900"
               tabindex="0"
             >
               <span class="text-3xl font-bold font-siddur">{{ tractate }}</span>
@@ -29,7 +29,7 @@
           <ul v-else-if="selected.daf == undefined" key="dafim">
             <div
               @click="goBack('tractate')"
-              class="flex items-center px-3 py-2 bg-teal-700 cursor-pointer text-teal-50"
+              class="flex items-center px-3 py-2 bg-blue-700 cursor-pointer text-blue-50"
             >
               <icon name="cheveron-right" class="inline w-4" />
               <span class="mr-2 font-bold">{{ selectedTractate }}</span>
@@ -39,8 +39,8 @@
                 v-for="(daf, i) in dafim[selected.tractate]"
                 :key="`${i}-${daf}`"
                 @click="goForward('daf', i)"
-                :class="[selected.daf == i ? 'bg-blue-200 hover:bg-blue-300' : 'bg-gray-100 hover:bg-teal-200']"
-                class="flex items-center justify-between px-3 py-2 text-gray-900 bg-gray-100 rounded outline-none cursor-pointer focus:shadow-outline-teal hover:text-teal-900"
+                :class="[selected.daf == i ? 'bg-blue-200 hover:bg-blue-300' : 'bg-gray-100 hover:bg-blue-200']"
+                class="flex items-center justify-between px-3 py-2 text-gray-900 bg-gray-100 rounded outline-none cursor-pointer focus:shadow-outline-blue hover:text-blue-900"
                 tabindex="0"
               >
                 <span class="text-3xl font-bold font-siddur">{{ numToDaf(i) }}</span>
@@ -53,7 +53,7 @@
           </ul>
           <!-- SECTIONS -->
           <article v-else key="sections">
-            <div @click="goBack('daf')" class="flex items-center px-3 py-2 bg-teal-700 cursor-pointer text-teal-50">
+            <div @click="goBack('daf')" class="flex items-center px-3 py-2 bg-blue-700 cursor-pointer text-blue-50">
               <icon name="cheveron-right" class="inline w-4" />
               <span class="mr-2 font-bold">{{ selectedTractate }}</span>
               <span class="mr-2">/</span>
@@ -70,8 +70,8 @@
                 v-for="(section, i) in sections"
                 :key="`${i}-${section.slice(0, 10)}`"
                 @click="select(i)"
-                :class="[selected.section == i ? 'bg-blue-200 hover:bg-blue-300' : 'hover:bg-teal-200']"
-                class="px-1.5 mx-0.5 py-1 rounded outline-none cursor-pointer font-sbl hover:text-teal-900"
+                :class="[selected.section == i ? 'bg-blue-200 hover:bg-blue-300' : 'hover:bg-blue-200']"
+                class="px-1.5 mx-0.5 py-1 rounded outline-none cursor-pointer font-sbl hover:text-blue-900"
                 v-html="section"
               >
               </span>
@@ -80,11 +80,11 @@
         </transition>
         <div v-else class="w-56 py-16">
           <div v-if="error">
-            <p class="text-xs text-center text-teal-700">לא הצלחנו להתחבר לספריא</p>
+            <p class="text-xs text-center text-blue-700">לא הצלחנו להתחבר לספריא</p>
           </div>
           <div v-else>
             <loader />
-            <p class="mt-3 text-xs text-center text-teal-700">טוען הש״ס</p>
+            <p class="mt-3 text-xs text-center text-blue-700">טוען הש״ס</p>
           </div>
         </div>
       </div>

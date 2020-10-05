@@ -49,7 +49,7 @@ $formulate-font-size: 0.8rem;
   &:focus {
     outline: 0;
     border: 1px solid $formulate-green;
-    @apply shadow-outline-teal;
+    @apply shadow-outline-blue;
   }
 }
 

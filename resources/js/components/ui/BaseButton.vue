@@ -68,10 +68,10 @@ export default {
             'text-orange-500 focus:shadow-outline-orange ' +
             (this.quiet ? 'hover:bg-orange-100' : 'bg-orange-100 hover:bg-orange-200')
           );
-        case 'teal':
+        case 'blue':
           return (
-            'text-teal-500 focus:shadow-outline-teal ' +
-            (this.quiet ? 'hover:bg-teal-100' : 'bg-teal-100 hover:bg-teal-200')
+            'text-blue-500 focus:shadow-outline-blue ' +
+            (this.quiet ? 'hover:bg-blue-100' : 'bg-blue-100 hover:bg-blue-200')
           );
       }
     },

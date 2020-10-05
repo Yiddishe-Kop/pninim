@@ -37,7 +37,7 @@
         </div>
       </div>
       <p v-if="$page.errors.content" class="text-xs text-red-500">{{ $page.errors.content[0] }}</p>
-      <input type="text" v-model="post.ref" placeholder="מראה מקום" class="text-sm ref" />
+      <span class="text-xs ref">({{ post.ref }})</span>
       <button
         type="submit"
         :class="[passesValidation ? 'bg-gray-800 text-gray-400 hover:text-gray-100' : 'bg-gray-500 text-gray-300']"

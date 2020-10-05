@@ -33,7 +33,7 @@
         </div>
         <div class="flex items-center justify-between px-10 py-4 bg-white border-t border-gray-200">
           <div></div>
-          <loading-button :loading="sending" class="btn-teal" type="submit">כניסה</loading-button>
+          <loading-button :loading="sending" class="btn-blue" type="submit">כניסה</loading-button>
         </div>
       </form>
     </div>

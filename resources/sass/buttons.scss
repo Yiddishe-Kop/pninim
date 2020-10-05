@@ -3,7 +3,7 @@ button {
   @apply rounded;
   &:focus,
   &:active {
-    @apply shadow-outline-teal;
+    @apply shadow-outline-blue;
   }
 }
 
@@ -15,12 +15,12 @@ button {
   }
 }
 
-.btn-teal {
-  @apply px-6 py-3 rounded bg-teal-600 text-white text-sm font-bold whitespace-no-wrap;
+.btn-blue {
+  @apply px-6 py-3 rounded bg-blue-600 text-white text-sm font-bold whitespace-no-wrap;
 
   &:hover,
   &:focus {
-    @apply bg-teal-500;
+    @apply bg-blue-500;
   }
 }
 
