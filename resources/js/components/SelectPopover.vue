@@ -1,6 +1,6 @@
 <template>
   <div ref="selectionPopover" class="absolute" :style="style">
-    <div :class="[bgColor]" class="relative z-10">
+    <div :class="[bgColor]" class="relative z-50">
       <slot />
     </div>
     <span

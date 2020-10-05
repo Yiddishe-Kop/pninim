@@ -38,6 +38,10 @@ class User extends Authenticatable implements ReacterableContract {
         return $this->hasMany(Post::class);
     }
 
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
     }

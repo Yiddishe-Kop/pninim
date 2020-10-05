@@ -8,16 +8,21 @@ use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model implements ReactableContract {
-    use Reactable, SoftDeletes;
+  use Reactable, SoftDeletes;
 
-    protected $guarded = [];
+  protected $guarded = [];
 
-    public function user() {
-        return $this->belongsTo(User::class);
-    }
+  // relations
+  public function user() {
+    return $this->belongsTo(User::class);
+  }
 
-    public function getCreatedAtAttribute($date) {
-        return Carbon::parse($date)->diffForHumans();
-    }
+  public function comments() {
+    return $this->hasMany(Comment::class)->whereNull('parent_id');
+  }
 
+  // accessors
+  public function getCreatedAtAttribute($date) {
+    return Carbon::parse($date)->diffForHumans();
+  }
 }

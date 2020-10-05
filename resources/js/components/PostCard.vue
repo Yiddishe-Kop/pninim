@@ -1,8 +1,5 @@
 <template>
-  <article
-    :class="{ 'z-50': mode == 'edit', 'opacity-25': post.deleted_at }"
-    class="relative bg-white shadow-md rounded-xl group"
-  >
+  <article :class="{ 'z-50': mode == 'edit', 'opacity-25': post.deleted_at }" class="group">
     <portal to="overlay" v-if="mode == 'edit'">
       <transition name="fade">
         <div @click="mode = 'read'" class="fixed inset-0 z-10 bg-gray-500 bg-opacity-75"></div>
@@ -30,8 +27,8 @@
         </button>
       </div>
     </div>
-    <section v-show="expanded" class="flex overflow-hidden rounded-b-xl">
-      <nav class="flex flex-col items-center justify-start p-3 pb-8 space-y-2 text-gray-400 bg-gray-300">
+    <section v-show="expanded" class="relative z-10 flex bg-white shadow-md rounded-b-xl">
+      <nav class="flex flex-col items-center justify-start p-3 pb-8 space-y-2 text-gray-400 bg-gray-300 rounded-br-xl">
         <icon name="user-circle" class="w-7" />
         <icon name="chat" class="w-7" />
         <icon name="calendar" class="w-7" />
@@ -58,73 +55,79 @@
           ></textarea>
         </div>
       </div>
-    </section>
-    <div
-      v-show="expanded"
-      class="absolute bottom-0 flex items-center justify-between transform translate-y-1/2 right-8 left-8"
-    >
-      <button
-        v-if="canEdit(post)"
-        @click="() => (post.deleted_at ? restore() : destroy())"
-        class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg"
-        title="Restore"
+      <div
+        v-show="expanded"
+        class="absolute bottom-0 z-10 flex items-center justify-between transform translate-y-1/2 right-8 left-8"
       >
-        <icon :name="post.deleted_at ? 'check-circle' : 'trash'" class="w-5 h-5" />
-      </button>
-      <inertia-link
-        v-if="post.deleted_at"
-        :href="route('posts.forceDelete', post.id)"
-        method="delete"
-        class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg"
-        title="Delete permanently"
-      >
-        <icon name="trash" class="w-5 h-5" />
-      </inertia-link>
-      <span v-else></span>
-      <div class="flex items-center text-gray-100 bg-gray-800 rounded-full shadow-lg">
         <button
           v-if="canEdit(post)"
-          @click="handleEdit"
+          @click="() => (post.deleted_at ? restore() : destroy())"
           class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg"
-          title="Edit"
+          title="Restore"
         >
-          <icon :name="mode == 'read' ? 'edit' : 'check'" class="w-5 h-5" />
+          <icon :name="post.deleted_at ? 'check-circle' : 'trash'" class="w-5 h-5" />
         </button>
-        <component
-          :is="canEdit(post) ? 'div' : 'InertiaLink'"
-          preserve-state
-          preserve-scroll
-          :href="route('posts.react', post.id)"
-          :data="{ reaction: 'Like' }"
-          method="POST"
-          class="p-2 pl-1 rounded-r-full group"
+        <inertia-link
+          v-if="post.deleted_at"
+          :href="route('posts.forceDelete', post.id)"
+          method="delete"
+          class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg"
+          title="Delete permanently"
         >
-          <span class="pr-1 text-xs font-black text-gray-500 transition group-hover:text-green-400">
-            {{ likes }}
-          </span>
-          <icon name="thumb-up" class="inline w-5 text-gray-400 transition group-hover:text-gray-100" />
-        </component>
-        <component
-          :is="canEdit(post) ? 'div' : 'InertiaLink'"
-          preserve-state
-          preserve-scroll
-          :href="route('posts.react', post.id)"
-          :data="{ reaction: 'Dislike' }"
-          method="POST"
-          class="p-2 pr-1 rounded-l-full group"
-        >
-          <icon name="thumb-down" class="inline w-5 text-gray-400 transition group-hover:text-gray-100" />
-          <span class="text-xs font-black text-gray-500 transition group-hover:text-orange-400">
-            {{ dislikes }}
-          </span>
-        </component>
+          <icon name="trash" class="w-5 h-5" />
+        </inertia-link>
+        <span v-else></span>
+        <div class="flex items-center text-gray-100 bg-gray-800 rounded-full shadow-lg">
+          <button
+            v-if="canEdit(post)"
+            @click="handleEdit"
+            class="p-2 text-gray-100 bg-gray-800 rounded-full shadow-lg"
+            title="Edit"
+          >
+            <icon :name="mode == 'read' ? 'edit' : 'check'" class="w-5 h-5" />
+          </button>
+          <component
+            :is="canEdit(post) ? 'div' : 'InertiaLink'"
+            preserve-state
+            preserve-scroll
+            :href="route('posts.react', post.id)"
+            :data="{ reaction: 'Like' }"
+            method="POST"
+            class="p-2 pl-1 rounded-r-full group"
+          >
+            <span class="pr-1 text-xs font-black text-gray-500 transition group-hover:text-green-400">
+              {{ likes }}
+            </span>
+            <icon name="thumb-up" class="inline w-5 text-gray-400 transition group-hover:text-gray-100" />
+          </component>
+          <component
+            :is="canEdit(post) ? 'div' : 'InertiaLink'"
+            preserve-state
+            preserve-scroll
+            :href="route('posts.react', post.id)"
+            :data="{ reaction: 'Dislike' }"
+            method="POST"
+            class="p-2 pr-1 rounded-l-full group"
+          >
+            <icon name="thumb-down" class="inline w-5 text-gray-400 transition group-hover:text-gray-100" />
+            <span class="text-xs font-black text-gray-500 transition group-hover:text-orange-400">
+              {{ dislikes }}
+            </span>
+          </component>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <comments :comments="post.comments" class="pt-6 mx-4 -mt-2">
+      <write-comment :post-id="post.id" class="relative mt-2" />
+    </comments>
   </article>
 </template>
 
 <script>
 import TrafficLights from './ui/TrafficLights';
+import Comments from './Comments';
+import WriteComment from './WriteComment';
 import Avatar from './ui/Avatar';
 
 export default {
@@ -132,7 +135,7 @@ export default {
   props: {
     post: Object,
   },
-  components: { TrafficLights, Avatar },
+  components: { TrafficLights, Avatar, Comments, WriteComment },
   data() {
     return {
       expanded: true,

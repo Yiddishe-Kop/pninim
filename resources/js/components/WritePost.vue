@@ -86,7 +86,7 @@ export default {
   methods: {
     async handleSelection(e) {
       this.post.ref = e.ref;
-      this.$set(this.post, 'title', e.text);
+      this.$set(this.post, 'title', e.text.replace(/\<.+?\>/g, ''));
       console.log(e, this.post.title);
       await this.$nextTick();
       this.$refs.titleInput.dispatchEvent(new Event('change')); // trigger event to resize textarea

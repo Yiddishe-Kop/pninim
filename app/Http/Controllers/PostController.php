@@ -19,8 +19,11 @@ class PostController extends Controller {
         return Inertia::render('Posts/Index', [
             'posts' => Post::with([
                 'user',
+                'comments.replies.user',
+                'comments.user',
                 'loveReactant.reactionCounters',
-            ])->where('created_at', '>', now()->subMonths(2))
+            ])->withCount('comments')
+            ->where('created_at', '>', now()->subMonths(2))
                 ->latest()
                 ->get(),
             'reactionTypes' => ReactionType::select('id', 'name')

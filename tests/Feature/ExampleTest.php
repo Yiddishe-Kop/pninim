@@ -2,20 +2,21 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testBasicTest()
-    {
-        $response = $this->get('/');
+class ExampleTest extends TestCase {
+  use RefreshDatabase;
 
-        $response->assertStatus(200);
-    }
+  public function testComment()
+  {
+    $this->actingAs(User::create([
+      'name' => 'Test',
+      'email' => 'test@test.com',
+      'password' => '12345678'
+    ]));
+    $this->get('/');
+    $this->assertAuthenticated();
+  }
 }
