@@ -55,6 +55,16 @@ class AppServiceProvider extends ServiceProvider {
             'old' => function () {
                 return session()->getOldInput();
             },
+            'modal' => [
+              'open' => false,
+              'icon' => 'warning',
+              'color' => 'red',
+              'title' => 'פנינים',
+              'message' => 'פנינים',
+              'action' => [
+                'label' => 'Hey!',
+              ],
+            ],
         ]);
     }
 

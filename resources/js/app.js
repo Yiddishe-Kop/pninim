@@ -46,3 +46,5 @@ const app = new Vue({
     },
   }),
 }).$mount(appEl)
+
+export default app;

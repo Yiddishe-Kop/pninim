@@ -77,6 +77,7 @@
       </div>
     </footer>
     <notification />
+    <modal />
   </div>
 </template>
 
@@ -85,9 +86,10 @@ import Logo from '@/components/ui/Logo';
 import Dropdown from '@/components/ui/Dropdown';
 import Avatar from '@/components/ui/Avatar';
 import Notification from '@/components/ui/Notification';
+import Modal from '@/components/ui/Modal';
 
 export default {
   name: 'Layout',
-  components: { Logo, Dropdown, Avatar, Notification },
+  components: { Logo, Dropdown, Avatar, Notification, Modal },
 };
 </script>

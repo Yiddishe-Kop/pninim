@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import Modals from '@/helpers/modal';
+
 export default {
   name: 'WriteComment',
   props: {
@@ -61,21 +63,31 @@ export default {
   }),
   methods: {
     submit() {
-      this.$inertia.post(
-        this.route('comments.store', this.postId),
-        {
-          content: this.values.content,
-          parent_id: this.parentId,
-        },
-        {
-          preserveScroll: true,
-        }
-      ).then(() => this.reply = false);
+      this.$inertia
+        .post(
+          this.route('comments.store', this.postId),
+          {
+            content: this.values.content,
+            parent_id: this.parentId,
+          },
+          {
+            preserveScroll: true,
+          }
+        )
+        .then(() => (this.reply = false));
     },
     destroy() {
-      this.$inertia.delete(this.route('comment.destroy', this.parentId), {
-        preserveState: true,
-        preserveScroll: true,
+      Modals.confirm({
+        title: 'מחק תגובה?',
+        message: `האם אתה בטוח שאתה רוצה למחוק תגובה זו? פעולה זו בלתי הפיך.`,
+        action: {
+          label: 'מחק',
+        },
+      }).then(() => {
+        this.$inertia.delete(this.route('comment.destroy', this.parentId), {
+          preserveState: true,
+          preserveScroll: true,
+        });
       });
     },
   },
