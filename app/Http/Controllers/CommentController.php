@@ -21,7 +21,7 @@ class CommentController extends Controller {
     $comment->parent_id = $data['parent_id'];
     $post->comments()->save($comment);
 
-    return back()->with('success', 'Your comment has been saved successfully!');
+    return back()->with('success', 'Your comment has been saved successfully!')->with('new_comment', $comment);
   }
 
   public function replies(Request $request, Comment $comment) {

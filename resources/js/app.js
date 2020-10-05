@@ -10,6 +10,10 @@ import BaseButton from '@/components/ui/BaseButton'
 import AutoSize from 'vue-auto-resize'
 import 'vue-slider-component/theme/default.css';
 
+// Fixes -> https://github.com/JeffreyWay/laravel-mix/issues/2376#issuecomment-665942865
+import CssBase from "css-loader/lib/css-base";
+import AddStyles from "style-loader/lib/addStyles";
+
 Vue.config.productionTip = false
 
 const axios = Axios.create({

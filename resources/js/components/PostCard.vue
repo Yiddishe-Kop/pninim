@@ -27,11 +27,33 @@
         </button>
       </div>
     </div>
-    <section v-show="expanded" class="relative z-10 flex bg-white shadow-md rounded-b-xl">
-      <nav class="flex flex-col items-center justify-start p-3 pb-8 space-y-2 text-gray-400 bg-gray-300 rounded-br-xl">
-        <icon name="user-circle" class="w-7" />
-        <icon name="chat" class="w-7" />
-        <icon name="calendar" class="w-7" />
+    <section
+      v-show="expanded"
+      :class="[show == 'comments' ? 'shadow-xl curved-shaddow-bottom' : 'shadow-md']"
+      class="relative z-10 flex transition bg-white rounded-b-xl"
+    >
+      <nav class="flex flex-col items-stretch justify-start px-0.5 pb-8 pt-2 text-gray-400 bg-gray-300 rounded-br-xl">
+        <button
+          @click="show = 'read'"
+          :class="{ 'text-blue-500': show == 'read' }"
+          class="px-1 py-1.5 hover:text-blue-400 transition"
+        >
+          <icon name="book-open" class="w-7" />
+        </button>
+        <button
+          @click="show = 'comments'"
+          :class="{ 'text-blue-500': show == 'comments' }"
+          class="px-1 py-1.5 hover:text-blue-400 transition"
+        >
+          <icon name="chat" class="w-7" />
+        </button>
+        <button
+          @click="show = 'date'"
+          :class="{ 'text-blue-500': show == 'date' }"
+          class="px-1 py-1.5 hover:text-blue-400 transition"
+        >
+          <icon name="calendar" class="w-7" />
+        </button>
       </nav>
       <div class="relative flex-1 p-4 pb-8">
         <div v-if="mode == 'read'">
@@ -118,15 +140,26 @@
       </div>
     </section>
 
-    <comments v-show="expanded" :comments="post.comments" class="pt-6 mx-4 -mt-2">
-      <write-comment :post-id="post.id" class="relative mt-2" />
-    </comments>
+    <transition
+      enter-active-class="transition duration-200 ease-out"
+      enter-from-class="transform -translate-y-12 opacity-0"
+      enter-to-class="transform translate-y-0 opacity-100"
+      leave-active-class="transition duration-150 ease-out"
+      leave-from-class="transform translate-y-0 opacity-100"
+      leave-to-class="transform -translate-y-12 opacity-0"
+    >
+      <comments v-if="expanded && show == 'comments'" :comments="post.comments" class="pt-10 mx-4 -mt-2">
+        <comment v-if="$page.newComment" :comment="$page.newComment" class="relative mt-2" />
+        <write-comment :post-id="post.id" class="relative mt-2" />
+      </comments>
+    </transition>
   </article>
 </template>
 
 <script>
 import TrafficLights from './ui/TrafficLights';
 import Comments from './Comments';
+import Comment from './Comment';
 import WriteComment from './WriteComment';
 import Avatar from './ui/Avatar';
 
@@ -135,10 +168,11 @@ export default {
   props: {
     post: Object,
   },
-  components: { TrafficLights, Avatar, Comments, WriteComment },
+  components: { TrafficLights, Avatar, Comments, Comment, WriteComment },
   data() {
     return {
       expanded: true,
+      show: this.post.comments.length ? 'comments' : 'read',
       mode: 'read',
       postEdit: {
         title: this.post.title,
@@ -204,3 +238,23 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.curved-shaddow-bottom {
+  @apply relative;
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+    background: url(/img/shaddow.png) no-repeat;
+    background-position: top;
+    background-size: 100% 100%;
+    height: 16px;
+    bottom: 0px;
+    left: 6px;
+    right: 6px;
+    transform: translateY(100%);
+    opacity: 0.5;
+  }
+}
+</style>

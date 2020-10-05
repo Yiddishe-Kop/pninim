@@ -72,9 +72,13 @@ class UserController extends Controller {
     return Inertia::render('Users/Show', [
       'user' => $user,
       'posts' => $posts,
+      'comments' => $user->comments()
+        ->with('parent.user')->get()
+        ->each(fn($c) => !$c->parent ? $c->setRelation('parent', $c->post) : ''), // if it doesn't have a parent comment - set the post as the parent
       'reactionTypes' => ReactionType::select('id', 'name')->get()->keyBy('id'),
       'counts' => [
         'posts' => $posts->count(),
+        'comments' => $user->comments()->count()
       ],
     ]);
   }

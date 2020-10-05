@@ -10,7 +10,10 @@
     </div>
 
     <portal-target name="overlay" slim />
-    <posts-list :posts="posts" />
+
+    <transition name="postList" appear>
+      <posts-list :posts="posts" />
+    </transition>
 
     <portal to="right-sidebar">
       <toolbar />

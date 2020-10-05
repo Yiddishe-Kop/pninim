@@ -1,8 +1,8 @@
 <template>
   <div class="relative">
-    <transition-group v-if="posts.length" name="postList" appear class="block my-12 space-y-8" data-selectable>
+    <ul v-if="posts.length" class="block my-12 space-y-8" data-selectable>
       <post-card v-for="post in posts" :key="post.id" :post="post" />
-    </transition-group>
+    </ul>
     <div v-else class="my-6 text-center">No posts yet 😬</div>
     <select-popover
       :top-offset="42"

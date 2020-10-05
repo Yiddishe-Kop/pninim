@@ -5,9 +5,10 @@
     :alt="user.name"
     class="inline-block bg-gray-200 rounded-full"
     :class="sizeClasses"
+    :title="user.name"
   />
 
-  <span v-else :class="sizeClasses" class="inline-flex items-center justify-center bg-gray-500 rounded-full">
+  <span v-else :class="sizeClasses" :title="user.name" class="inline-flex items-center justify-center bg-gray-500 rounded-full">
     <span :class="textSizeClass" class="font-medium leading-none text-white">{{ initials(user.name) }}</span>
   </span>
 </template>

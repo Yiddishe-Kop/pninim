@@ -2,6 +2,9 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+
 class Comment extends Model {
 
   // relations
@@ -10,12 +13,24 @@ class Comment extends Model {
   }
 
   public function replies() {
-    return $this->hasMany(Comment::class, 'parent_id');
+    return $this->hasMany(Comment::class, 'parent_id')->latest();
+  }
+
+  public function parent() {
+    return $this->belongsTo(Comment::class, 'parent_id');
+  }
+
+  public function post() {
+    return $this->belongsTo(Post::class)->with('user');
   }
 
   // accessors
   public function getRepliesCountAttribute() {
     return $this->replies()->count();
+  }
+
+  public function getCreatedAtAttribute($date) {
+    return Carbon::parse($date)->diffForHumans();
   }
 
   protected $with = ['user'];

@@ -18,17 +18,17 @@ class PostController extends Controller {
     public function index() {
         return Inertia::render('Posts/Index', [
             'posts' => Post::with([
-                'user',
-                'comments.replies.user',
-                'comments.user',
-                'loveReactant.reactionCounters',
-            ])
-            ->where('created_at', '>', now()->subMonths(2))
-                ->latest()
-                ->get(),
+              'user',
+              'comments.replies.user',
+              'comments.user',
+              'loveReactant.reactionCounters',
+            ])->where('created_at', '>', now()->subMonths(2))
+              ->latest()
+              ->get(),
             'reactionTypes' => ReactionType::select('id', 'name')
-                ->get()
-                ->keyBy('id'),
+              ->get()
+              ->keyBy('id'),
+            'newComment' => session('new_comment')
         ]);
     }
 

@@ -92,11 +92,11 @@ export default {
   },
   beforeDestroy() {
     const target = document.querySelector('[data-selectable]');
-    target.removeEventListener('mouseup', this.handleMouseUp);
+    target && target.removeEventListener('mouseup', this.handleMouseUp);
   },
   mounted() {
     const target = document.querySelector('[data-selectable]');
-    target.addEventListener('mouseup', this.handleMouseUp);
+    target && target.addEventListener('mouseup', this.handleMouseUp);
   },
 };
 </script>

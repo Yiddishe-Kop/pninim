@@ -74,12 +74,15 @@ export default {
             preserveScroll: true,
           }
         )
-        .then(() => (this.reply = false));
+        .then(() => {
+          console.log('Got back');
+          this.reply = false;
+        });
     },
     destroy() {
       Modals.confirm({
         title: 'מחק תגובה?',
-        message: `האם אתה בטוח שאתה רוצה למחוק תגובה זו? פעולה זו בלתי הפיך.`,
+        message: `האם אתה בטוח שאתה רוצה למחוק תגובה זו?<br> פעולה זו בלתי הפיך.`,
         action: {
           label: 'מחק',
         },

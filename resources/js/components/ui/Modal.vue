@@ -32,14 +32,14 @@
             <icon :name="$page.modal.icon" :class="getClasses().text" class="w-6 h-6" />
           </div>
           <div class="w-full mt-3 text-center sm:mt-0 sm:mr-4 sm:text-right">
-            <h3 class="mt-1 text-xl font-bold leading-6 text-gray-900">{{ $page.modal.title }}</h3>
-            <div class="mt-4">
-              <p class="text-sm leading-5 text-gray-700" v-html="$page.modal.message"></p>
+            <h3 class="mt-0 text-4xl font-bold leading-6 text-gray-900 font-siddur">{{ $page.modal.title }}</h3>
+            <div class="mt-6">
+              <p class="text-sm leading-5 text-gray-700 sm:text-base" v-html="$page.modal.message"></p>
             </div>
             <portal-target name="modal" />
           </div>
         </div>
-        <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+        <div class="mt-5 sm:flex sm:flex-row-reverse">
           <span class="flex w-full rounded-md shadow-sm sm:mr-3 sm:w-auto">
             <button
               @click="confirm"

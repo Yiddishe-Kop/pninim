@@ -25,28 +25,39 @@
         </p>
       </div>
       <div class="flex items-center justify-end">
-        <div class="inline-block px-6 py-3 text-center bg-green-100 rounded-lg">
+        <button @click="tab = 'posts'" :class="[tab == 'posts' ? 'focus:shadow-outline-green shadow-outline-green' : 'opacity-25']" class="inline-block px-6 py-3 text-center transition bg-green-100 rounded-lg">
           <h3 class="text-3xl font-bold text-green-700">{{ $page.counts.posts }}</h3>
           <p class="mt-1 text-green-400">פנינים</p>
-        </div>
+        </button>
+        <button @click="tab = 'comments'" :class="[tab == 'comments' ? 'focus:shadow-outline-orange shadow-outline-orange' : 'opacity-25']" class="inline-block px-6 py-3 mr-2 text-center transition bg-orange-100 rounded-lg">
+          <h3 class="text-3xl font-bold text-orange-700">{{ $page.counts.comments }}</h3>
+          <p class="mt-1 text-orange-400">תגובות</p>
+        </button>
       </div>
     </div>
 
     <portal-target name="overlay" slim />
-    <posts-list :posts="posts.data" />
+    <transition name="postList" appear>
+      <posts-list v-if="tab == 'posts'" :posts="posts.data" />
+      <comments-list v-else-if="tab == 'comments'" :comments="comments" />
+    </transition>
   </div>
 </template>
 
 <script>
 import Layout from '../../Layouts/App';
 import PostsList from '@/components/PostsList';
+import CommentsList from '@/components/CommentsList';
 import Avatar from '../../components/ui/Avatar';
 
 export default {
   name: 'ShowUser',
-  props: ['user', 'posts'],
+  props: ['user', 'posts', 'comments'],
   layout: Layout,
-  components: { Avatar, PostsList },
+  components: { Avatar, PostsList, CommentsList },
+  data: vm => ({
+    tab: 'posts'
+  }),
   computed: {
     currentUser() {
       return this.$page.auth.user;
