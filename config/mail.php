@@ -15,7 +15,7 @@ return [
 
     'default' => env('MAIL_MAILER', 'smtp'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Mailer Configurations
     |--------------------------------------------------------------------------
@@ -59,7 +59,7 @@ return [
 
         'sendmail' => [
             'transport' => 'sendmail',
-            'path' => '/usr/sbin/sendmail -bs',
+            'path' => env('MAIL_SENDMAIL', '/usr/sbin/sendmail -bs'),
         ],
 
         'log' => [
