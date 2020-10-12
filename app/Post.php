@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model implements ReactableContract {
   use Reactable, SoftDeletes;
 
+  const TYPE_QUESTION = 'שאלה';
+  const TYPE_CHIDDUSH = 'חידוש';
+  const TYPE_NOTE = 'הערה';
+  const TYPE_BIUR = 'ביאור';
+
   protected $guarded = [];
 
   // relations

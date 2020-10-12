@@ -37,7 +37,19 @@
         </div>
       </div>
       <p v-if="$page.errors.content" class="text-xs text-red-500">{{ $page.errors.content[0] }}</p>
-      <span class="text-xs ref">({{ post.ref }})</span>
+      <div class="flex">
+        <span v-show="!!post.ref" class="text-xs ref">({{ post.ref }})</span>
+        <ul class="flex items-center mr-4">
+          <button v-for="type in types" :key="type" @click="post.type = type" type="button" class="mx-1 rounded-full">
+            <badge
+              :class="[post.type == type ? '' : 'bg-opacity-0 text-opacity-50 hover:text-opacity-75 hover:bg-opacity-25']"
+              class="transition-all duration-100 ease-in"
+              :color="colors[type]"
+              >{{ type }}</badge
+            >
+          </button>
+        </ul>
+      </div>
       <button
         type="submit"
         :class="[passesValidation ? 'bg-gray-800 text-gray-400 hover:text-gray-100' : 'bg-gray-500 text-gray-300']"
@@ -60,15 +72,30 @@
 import Avatar from './ui/Avatar';
 import SourceSelectModal from './SourceSelectModal';
 
+const TYPES = {
+  BIUR: 'ביאור',
+  QUESTION: 'שאלה',
+  CHIDDUSH: 'חידוש',
+  NOTE: 'הערה',
+};
+
 export default {
   name: 'WritePost',
   components: { Avatar, SourceSelectModal },
   data() {
     return {
+      types: TYPES,
+      colors: {
+        שאלה: 'red',
+        הערה: 'blue',
+        ביאור: 'orange',
+        חידוש: 'yellow',
+      },
       post: {
         title: '',
         ref: '',
         content: '',
+        type: TYPES.BIUR,
       },
       user: this.$page.auth.user,
       mouseOverWriteForm: false,

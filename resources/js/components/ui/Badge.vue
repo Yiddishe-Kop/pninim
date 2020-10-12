@@ -61,10 +61,6 @@ export default {
           badgeClasses += 'bg-blue-100 text-blue-800';
           dotClasses += 'text-blue-400';
           break;
-        case 'blue':
-          badgeClasses += 'bg-blue-100 text-blue-800';
-          dotClasses += 'text-blue-400';
-          break;
         case 'pink':
           badgeClasses += 'bg-pink-100 text-pink-800';
           dotClasses += 'text-pink-400';

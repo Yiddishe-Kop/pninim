@@ -33,7 +33,7 @@ class PostController extends Controller {
     }
 
     public function create() {
-
+      //
     }
 
     public function store(Request $request) {
@@ -44,6 +44,12 @@ class PostController extends Controller {
                 'content' => 'required|max:5096|string',
                 'ref' => 'required',
                 'status' => 'nullable',
+                'type' => sprintf('nullable|in:%s,%s,%s,%s',
+                  Post::TYPE_BIUR,
+                  Post::TYPE_CHIDDUSH,
+                  Post::TYPE_NOTE,
+                  Post::TYPE_QUESTION
+                ),
             ])
         );
 

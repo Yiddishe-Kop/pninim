@@ -8,20 +8,20 @@
 
     <div :class="[expanded ? 'rounded-t-xl' : 'rounded-xl']" class="flex justify-between p-3 text-gray-100 bg-gray-800">
       <div class="flex items-center">
-        <traffic-lights @red="() => (canEdit(post) ? destroy() : '')" @yellow="expanded = !expanded" class="mr-1" />
+        <traffic-lights @red="() => (canEdit(post) ? destroy() : '')" @yellow="expanded = !expanded" class="ml-4 mr-1" />
+        <inertia-link :href="route('users.show', post.user.id)" class="flex items-center">
+          <avatar :user="post.user" size="sm" />
+          <icon v-if="post.user.is_approved" name="badge-check" class="w-4 mr-1 text-blue-300" />
+        </inertia-link>
+        <span class="mx-1 font-bold text-gray-400">&middot;</span>
+        <span class="text-xs text-gray-400">{{ post.created_at }}</span>
+      </div>
+      <div class="flex items-center">
+        <badge v-if="post.type" :color="colors[post.type]">{{ post.type }}</badge>
         <icon name="book" class="w-4 mr-4 text-gray-300" />
         <a :href="`https://torah.yiddishe-kop.com/torah/${post.ref}`" class="mr-2 font-light font-sbl" target="_blank">
           {{ post.ref }}
         </a>
-      </div>
-      <div class="flex items-center">
-        <inertia-link :href="route('users.show', post.user.id)" class="flex items-center">
-          <avatar :user="post.user" size="sm" />
-          <span class="mr-1.5 text-xs font-medium">{{ post.user.name }}</span>
-          <icon v-if="post.user.is_approved" name="badge-check" class="w-5 mr-1 text-blue-300" />
-        </inertia-link>
-        <span class="mx-1 font-bold text-gray-400">&middot;</span>
-        <span class="text-xs text-gray-400">{{ post.created_at }}</span>
         <button @click="expanded = !expanded" class="mr-2 text-gray-500 transition hover:text-gray-300">
           <icon name="selector" class="w-5" />
         </button>
@@ -177,6 +177,12 @@ export default {
       postEdit: {
         title: this.post.title,
         content: this.post.content,
+      },
+      colors: {
+        שאלה: 'red',
+        הערה: 'blue',
+        ביאור: 'orange',
+        חידוש: 'yellow',
       },
     };
   },
