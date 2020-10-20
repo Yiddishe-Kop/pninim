@@ -22,8 +22,7 @@ class PostController extends Controller {
               'comments.replies.user',
               'comments.user',
               'loveReactant.reactionCounters',
-            ])->where('created_at', '>', now()->subMonths(2))
-              ->latest()
+            ])->latest()
               ->get(),
             'reactionTypes' => ReactionType::select('id', 'name')
               ->get()
