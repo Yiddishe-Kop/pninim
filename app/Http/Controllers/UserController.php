@@ -76,8 +76,8 @@ class UserController extends Controller {
         ->each(fn($c) => !$c->parent ? $c->setRelation('parent', $c->post) : ''), // if it doesn't have a parent comment - set the post as the parent
       'reactionTypes' => ReactionType::select('id', 'name')->get()->keyBy('id'),
       'counts' => [
-        'posts' => $posts->count(),
-        'comments' => $user->comments()->count()
+        'posts' => $posts->total(),
+        'comments' => $user->comments->count()
       ],
     ]);
   }
