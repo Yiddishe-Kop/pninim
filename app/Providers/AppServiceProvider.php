@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -20,6 +21,13 @@ class AppServiceProvider extends ServiceProvider {
 
     public function boot() {
         Carbon::setLocale('he');
+
+        Inertia::macro('data', function ($page, $props = []) {
+          if (request()->wantsJson()) {
+            return new JsonResponse($props);
+          }
+          return Inertia::render($page, $props);
+        });
     }
 
     public function registerInertia() {

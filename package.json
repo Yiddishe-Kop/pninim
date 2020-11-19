@@ -30,6 +30,7 @@
     "tailwindcss": "^1.8.10",
     "vue": "^2.6.11",
     "vue-auto-resize": "^1.0.1",
+    "vue-infinite-loading": "^2.4.5",
     "vue-slider-component": "^3.2.5"
   }
 }

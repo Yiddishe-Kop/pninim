@@ -2,6 +2,7 @@
   <div class="relative">
     <ul v-if="posts.length" class="block my-12 space-y-8" data-selectable>
       <post-card v-for="post in posts" :key="post.id" :post="post" />
+      <slot/>
     </ul>
     <div v-else class="my-6 text-center">No posts yet 😬</div>
     <select-popover
@@ -12,7 +13,7 @@
       bg-color="bg-gray-800"
       ref="selectionPopover"
       class="flex items-center p-1 text-gray-100 bg-gray-800 rounded-md shadow-lg"
-      style="transform: rotate(-6deg);"
+      style="transform: rotate(-6deg)"
     >
       <button @click="lookupInLexicon" class="p-1 bg-gray-700 rounded hover:bg-gray-600" title="Lookup Meaning">
         <icon name="question-circle" class="w-5" />
@@ -37,7 +38,7 @@
           <ul class="space-y-1">
             <li
               v-for="item in t.content.senses"
-              :key="Math.random()"
+              :key="item.definition"
               v-html="item.definition"
               class="text-xs text-justify"
             ></li>

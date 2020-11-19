@@ -65,10 +65,10 @@ class UserController extends Controller {
         'comments.user',
       ])
       ->latest()
-      ->paginate(20);
+      ->paginate(10);
     // manually set the user relation to each post (as no need to refetch from the DB - optimization)
     collect($posts->items())->map->setRelation('user', $user);
-    return Inertia::render('Users/Show', [
+    return Inertia::data('Users/Show', [
       'user' => $user,
       'posts' => $posts,
       'comments' => $user->comments()

@@ -16,14 +16,14 @@ class PostController extends Controller {
     }
 
     public function index() {
-        return Inertia::render('Posts/Index', [
+        return Inertia::data('Posts/Index', [
             'posts' => Post::with([
               'user',
               'comments.replies.user',
               'comments.user',
               'loveReactant.reactionCounters',
             ])->latest()
-              ->get(),
+              ->paginate(10),
             'reactionTypes' => ReactionType::select('id', 'name')
               ->get()
               ->keyBy('id'),

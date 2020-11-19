@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', 'PostController@index')->name('home');
-Route::get('/mail', function () {
-   Mail::to('newgraphil@gmail.com')->send(new TestMail());
-   return new TestMail();
-});
+
+// Route::get('/mail', function () {
+//    Mail::to('newgraphil@gmail.com')->send(new TestMail());
+//    return new TestMail();
+// });
 
 // Uploads
 Route::post('/upload', 'UploadController');
