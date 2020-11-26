@@ -16,7 +16,6 @@ class AppServiceProvider extends ServiceProvider {
     public function register() {
         $this->registerInertia();
         $this->registerGlide();
-
     }
 
     public function boot() {

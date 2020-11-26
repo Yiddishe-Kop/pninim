@@ -16,17 +16,7 @@ class UserController extends Controller {
     $this->authorize('viewAny', User::class);
 
     return Inertia::render('Users/Index', [
-      'users' => User::paginate()
-        ->transform(function ($user) {
-          return [
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'is_approved' => $user->is_approved,
-            'is_admin' => $user->is_admin,
-            'photoUrl' => $user->photoUrl,
-          ];
-        }),
+      'users' => User::all(),
     ]);
   }
 
@@ -73,7 +63,7 @@ class UserController extends Controller {
       'posts' => $posts,
       'comments' => $user->comments()
         ->with('parent.user')->get()
-        ->each(fn($c) => !$c->parent ? $c->setRelation('parent', $c->post) : ''), // if it doesn't have a parent comment - set the post as the parent
+        ->each(fn ($c) => !$c->parent ? $c->setRelation('parent', $c->post) : ''), // if it doesn't have a parent comment - set the post as the parent
       'reactionTypes' => ReactionType::select('id', 'name')->get()->keyBy('id'),
       'counts' => [
         'posts' => $posts->total(),

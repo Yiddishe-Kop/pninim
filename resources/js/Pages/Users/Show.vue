@@ -86,7 +86,7 @@ export default {
   methods: {
     async loadMore($state) {
       console.log('Loading more...');
-      const { data } = await this.$axios.get(this.route('home', { page: this.page + 1 }));
+      const { data } = await this.$axios.get(this.route('users.show', { page: this.page + 1 }));
       if (!data.posts.data.length) {
         $state.complete();
       } else {
