@@ -16,13 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// TEMP to reset user pawwsord [! not secure]
-Route::get('users/{user}/set-password/{password}', function (User $user, $password) {
-    return $user->update([
-        'password' => $password
-    ]);
-});
-
 Route::get('/posts', function () {
     return response()->json(
         PostResource::collection(
