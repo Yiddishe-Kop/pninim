@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea68e6dffb464b680c9a0e0cf09a0941",
+    "content-hash": "c0e14aaab1aee60d3125e215b1cb2db7",
     "packages": [
         {
             "name": "brick/math",
@@ -2338,6 +2338,99 @@
                 "source": "https://github.com/thephpleague/glide/tree/2.2.2"
             },
             "time": "2022-02-21T07:40:55+00:00"
+        },
+        {
+            "name": "league/glide-laravel",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/glide-laravel.git",
+                "reference": "b525e33e32940f3b047d6ca357131aba0e973e72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/glide-laravel/zipball/b525e33e32940f3b047d6ca357131aba0e973e72",
+                "reference": "b525e33e32940f3b047d6ca357131aba0e973e72",
+                "shasum": ""
+            },
+            "require": {
+                "league/glide-symfony": "^1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9",
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "League\\Glide\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Reinink",
+                    "email": "jonathan@reinink.ca",
+                    "homepage": "http://reinink.ca"
+                }
+            ],
+            "description": "Glide adapter for Laravel",
+            "homepage": "http://glide.thephpleague.com",
+            "support": {
+                "issues": "https://github.com/thephpleague/glide-laravel/issues",
+                "source": "https://github.com/thephpleague/glide-laravel/tree/master"
+            },
+            "time": "2015-12-26T15:40:35+00:00"
+        },
+        {
+            "name": "league/glide-symfony",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/glide-symfony.git",
+                "reference": "8d0b117d5335699c374288a7cd6a041b7612e198"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/glide-symfony/zipball/8d0b117d5335699c374288a7cd6a041b7612e198",
+                "reference": "8d0b117d5335699c374288a7cd6a041b7612e198",
+                "shasum": ""
+            },
+            "require": {
+                "league/glide": "^2.0",
+                "symfony/http-foundation": "^2.3|^3.0|^4.0|^5.0|^6.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.3",
+                "phpunit/phpunit": "^8.5|^9.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "League\\Glide\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Reinink",
+                    "email": "jonathan@reinink.ca",
+                    "homepage": "http://reinink.ca"
+                }
+            ],
+            "description": "Glide adapter for Symfony",
+            "homepage": "http://glide.thephpleague.com",
+            "support": {
+                "issues": "https://github.com/thephpleague/glide-symfony/issues",
+                "source": "https://github.com/thephpleague/glide-symfony/tree/1.1.0"
+            },
+            "time": "2021-12-01T13:25:09+00:00"
         },
         {
             "name": "league/mime-type-detection",

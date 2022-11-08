@@ -2,17 +2,19 @@
 
 namespace App;
 
-use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
-use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\URL;
 use League\Glide\Server;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
+use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
 
-class User extends Authenticatable implements ReacterableContract {
-    use Notifiable, Reacterable;
+class User extends Authenticatable implements ReacterableContract
+{
+    use Notifiable;
+    use Reacterable;
 
     protected $fillable = [
         'name', 'email', 'password', 'photo_path',
@@ -30,29 +32,35 @@ class User extends Authenticatable implements ReacterableContract {
 
     protected $appends = ['photoUrl'];
 
-    public function profile() {
+    public function profile()
+    {
         return $this->hasOne(Profile::class);
     }
 
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class)->latest();
     }
 
-    public function setPasswordAttribute($password) {
+    public function setPasswordAttribute($password)
+    {
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
     }
 
-    public function getPhotoUrlAttribute() {
+    public function getPhotoUrlAttribute()
+    {
         return $this->photoUrl(['w' => 100, 'h' => 100, 'fit' => 'crop']);
     }
 
-    public function photoUrl(array $attributes) {
+    public function photoUrl(array $attributes)
+    {
         if ($this->photo_path) {
-            return URL::to(App::make(Server::class)->fromPath($this->photo_path, $attributes));
+            return URL::route('image', ['path' => $this->photo_path, ...$attributes]);
         }
     }
 }

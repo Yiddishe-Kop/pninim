@@ -3,33 +3,33 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Inertia\Inertia;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
-use Inertia\Inertia;
-use League\Glide\Server;
 
-class AppServiceProvider extends ServiceProvider {
-
-    public function register() {
+class AppServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
         $this->registerInertia();
-        $this->registerGlide();
     }
 
-    public function boot() {
+    public function boot()
+    {
         Carbon::setLocale('he');
 
         Inertia::macro('data', function ($page, $props = []) {
-          if (request()->wantsJson()) {
-            return new JsonResponse($props);
-          }
-          return Inertia::render($page, $props);
+            if (request()->wantsJson()) {
+                return new JsonResponse($props);
+            }
+            return Inertia::render($page, $props);
         });
     }
 
-    public function registerInertia() {
+    public function registerInertia()
+    {
         Inertia::version(function () {
             return md5_file(public_path('mix-manifest.json'));
         });
@@ -74,16 +74,4 @@ class AppServiceProvider extends ServiceProvider {
             ],
         ]);
     }
-
-    protected function registerGlide() {
-        $this->app->bind(Server::class, function ($app) {
-            return Server::create([
-                'source' => Storage::getDriver(),
-                'cache' => Storage::getDriver(),
-                'cache_folder' => '.glide-cache',
-                'base_url' => 'img',
-            ]);
-        });
-    }
-
 }
